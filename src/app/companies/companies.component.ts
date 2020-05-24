@@ -1,5 +1,6 @@
 import { Observable } from "rxjs";
-import { CompanyService,Company } from '@app/_services';
+import { CompanyService } from '@app/_services';
+import { Company } from '@app/_models';
 import { Component, OnInit } from "@angular/core";
 import { Router } from '@angular/router';
 

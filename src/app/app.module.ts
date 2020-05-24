@@ -25,6 +25,7 @@ import { MatToolbarModule,
 import { HomeComponent } from '@app/home/home.component';
 import { LoginComponent } from '@app/login/login.component';
 import {CompaniesComponent} from '@app/companies/companies.component';
+import {CreateCompanyComponent} from '@app/create-company/create-company.component';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import {CompaniesComponent} from '@app/companies/companies.component';
     AppComponent,
     HomeComponent,
     LoginComponent,
-    CompaniesComponent
+    CompaniesComponent,
+    CreateCompanyComponent
   ],
   imports: [
     BrowserModule,
@@ -56,8 +58,8 @@ import {CompaniesComponent} from '@app/companies/companies.component';
     MatProgressSpinnerModule,
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
+   // { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
     ],
   bootstrap: [AppComponent]
 })

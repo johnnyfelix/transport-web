@@ -16,8 +16,8 @@ export class CompanyService {
     return this.http.get(`${this.baseUrl}/${id}`);
   }
 
-  createCompany(employee: Object): Observable<Object> {
-    return this.http.post(`${this.baseUrl}`, employee);
+  createCompany(company: Object): Observable<Object> {
+    return this.http.post(`${this.baseUrl}`, company);
   }
 
   updateCompany(id: number, value: any): Observable<Object> {

@@ -16,8 +16,8 @@ export class AuthService {
 
   constructor(private http: HttpClient,private router: Router) {
     this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
-    console.log("token "+localStorage.getItem('token'))
-    this.token = localStorage.getItem('token');
+    console.log("tr_token "+localStorage.getItem('tr_token'))
+    this.token = localStorage.getItem('tr_token');
     this.currentUser = this.currentUserSubject.asObservable();
   }
 
@@ -36,19 +36,12 @@ export class AuthService {
   login(username: string, password: string) {
     console.log("login ")
     return this.http.post<any>(`${environment.apiUrl}/auth`, { username, password });
-     /* .pipe(map(user => {
-        // store user details and jwt token in local storage to keep user logged in between page refreshes
-        localStorage.setItem('currentUser', JSON.stringify(user));
-        this.currentUserSubject.next(user);
-        this.isAuthenticated.next(true);
-        return user;
-      }));*/
   }
 
   logout(redirect: string) {
     // remove user from local storage to log user out
     localStorage.removeItem('currentUser');
-    localStorage.removeItem('token');
+    localStorage.removeItem('tr_token');
     this.currentUserSubject.next(null);
     this.isAuthenticated.next(false);
     this.router.navigate([redirect]);
