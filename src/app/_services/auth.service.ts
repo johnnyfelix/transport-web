@@ -15,15 +15,20 @@ export class AuthService {
   public token: string = null;
 
   constructor(private http: HttpClient,private router: Router) {
+    this.setUserDetails();
+  }
+
+  setUserDetails(){
     this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
-    console.log("tr_token "+localStorage.getItem('tr_token'))
+    console.log("tr_token from local store "+localStorage.getItem('tr_token'))
     this.token = localStorage.getItem('tr_token');
     this.currentUser = this.currentUserSubject.asObservable();
   }
 
   async checkAuthenticated() {
-    if (this.currentUserValue) {
-      // logged in so return true
+    this.setUserDetails();
+    if (this.currentUserValue && this.token) {
+      // Local store has CurrentUser
       this.isAuthenticated.next(true);
       return true;
     }
@@ -34,7 +39,7 @@ export class AuthService {
   }
 
   login(username: string, password: string) {
-    console.log("login ")
+    console.log("login request")
     return this.http.post<any>(`${environment.apiUrl}/auth`, { username, password });
   }
 

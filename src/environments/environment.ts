@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:8080/transport-api'
-  //apiUrl: 'http://193.62.55.228:8080/transport-api'
+  //apiUrl: 'http://localhost:8080/transport-api'
+  apiUrl: 'http://193.62.55.228:8080/transport-api'
 };
 
 /*

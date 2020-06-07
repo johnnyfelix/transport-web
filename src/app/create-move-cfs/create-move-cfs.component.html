@@ -1,0 +1,121 @@
+<!-- wrapper -->
+<mat-toolbar color="warn">
+  <mat-toolbar-row>
+    <h3>Create Movement (Port to CFS)</h3>
+    <span class="fill-space"></span>
+    <div fxLayout="row" fxShow="false" fxShow.gt-sm>
+      <button mat-flat-button routerLink="/view-move-cfs" color="primary">View Movement records</button>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>
+<mat-sidenav-container>
+  <mat-sidenav-content>
+    <form [formGroup]="myForm" (ngSubmit)="submitForm()" novalidate>
+
+      <!-- Date picker -->
+      <mat-form-field>
+        <input matInput readonly [matDatepicker]="picker" placeholder="Date of Transport" formControlName="transportDate"
+               (dateChange)="date($event)">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error *ngIf="errorHandling('transportDate', 'required')">
+          Please enter <strong>date of transport</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Movement Type" formControlName="movementType">
+        <mat-error *ngIf="errorHandling('movementType', 'required')">
+          You must provide <strong>Movement Type</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="size" formControlName="size">
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Container Number" formControlName="containerNumber">
+        <mat-error *ngIf="errorHandling('containerNumber', 'required')">
+          You must provide <strong>Container Number</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="From Location" formControlName="fromLocation">
+        <mat-error *ngIf="errorHandling('fromLocation', 'required')">
+          You must provide <strong>From Location</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="To Location" formControlName="toLocation">
+        <mat-error *ngIf="errorHandling('toLocation', 'required')">
+          You must provide <strong>To Location</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Via" formControlName="via">
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Advance" formControlName="advance">
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Diesel" formControlName="diesel">
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Incentive" formControlName="incentive">
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Cash Sundries" formControlName="cashSundries">
+      </mat-form-field>
+
+
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Weight" formControlName="weight">
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Vehicle Number" formControlName="vehicleNumber">
+        <mat-error *ngIf="errorHandling('vehicleNumber', 'required')">
+          You must provide <strong>Vehicle Number</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="LR Number" formControlName="lrNumber">
+        <mat-error *ngIf="errorHandling('lrNumber', 'required')">
+          You must provide <strong>LR Number</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="DO Number" formControlName="doNumber">
+        <mat-error *ngIf="errorHandling('doNumber', 'required')">
+          You must provide <strong>DO Number</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Submit -->
+      <div class="button-wrapper">
+        <button mat-flat-button color="primary">Submit</button>
+      </div>
+      <br><br>
+
+      <div [hidden]="!error">
+        <h5><p class="help is-danger">{{ message }}</p></h5>
+      </div>
+
+      <div [hidden]="!success">
+        <h5><p class="help is-success">{{ message }}</p></h5>
+      </div>
+    </form>
+
+
+  </mat-sidenav-content>
+</mat-sidenav-container>

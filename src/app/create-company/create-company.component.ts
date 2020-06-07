@@ -2,6 +2,7 @@ import { Company } from '@app/_models';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CompanyService } from '@app/_services';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-create-company',
@@ -11,32 +12,53 @@ import { CompanyService } from '@app/_services';
 export class CreateCompanyComponent implements OnInit {
 
   company: Company = new Company();
-  submitted = false;
+  error: boolean;
+  form: FormGroup;
+  control: FormControl;
+  message: string;
 
-  constructor(private companyService: CompanyService,
+  constructor(
+    private companyService: CompanyService,
+    private fb: FormBuilder,
     private router: Router) { }
 
   ngOnInit() {
-  }
-
-  newCompany(): void {
-    this.submitted = false;
+    this.error = false;
     this.company = new Company();
+    this.control = this.fb.control("", Validators.required);
+    this.form = this.fb.group({
+      name: ['', Validators.required],
+      description: ['', Validators.required]
+    });
+    this.message = "";
   }
 
   save() {
     this.companyService.createCompany(this.company)
-      .subscribe(data => console.log(data), error => console.log(error));
+      .subscribe(
+        data => {
+          //console.log(data);
+          this.gotoList();
+        },
+        error => {
+          //console.log(error);
+          this.message = error.error.error;
+          this.error = true;
+        });
     this.company = new Company();
-    this.gotoList();
+
   }
 
   onSubmit() {
-    this.submitted = true;
-    this.save();
+    if (this.form.valid) {
+      this.company.name = this.form.get('name').value;
+      this.company.description = this.form.get('description').value;
+      this.save();
+    }
+
   }
 
   gotoList() {
-    this.router.navigate(['/company-list']);
+    this.router.navigate(['/companies']);
   }
 }

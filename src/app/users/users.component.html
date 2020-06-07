@@ -1,0 +1,24 @@
+<div class="panel panel-primary">
+  <div class="panel-body">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Username</th>
+          <th>Company</th>
+          <th>Active</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users | async">
+          <td>{{ user.username }}</td>
+          <td>{{ user.company }}</td>
+          <td *ngIf="user.disabled"><button (click)="disableEnableUser(''+user.username+'',false)" class="btn btn-danger">Inactive1</button></td>
+          <td *ngIf="!user.disabled"><button (click)="disableEnableUser(''+user.username+'',true)" class="btn btn-success">Active1</button></td>
+          <td><a routerLink="/reset-password/{{user.username}}">Reset Password</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+

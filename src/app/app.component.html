@@ -1,30 +1,73 @@
-<mat-toolbar color="primary" class="expanded-toolbar">
-    <span>
-   <button mat-button routerLink="/home"><mat-icon>home</mat-icon></button>
-  </span>
-  <h1>Grace Transport & Container Software Solutions!</h1>
-  <div><nav class="navbar navbar-expand-sm bg-primary navbar-dark">
-    <!-- Links -->
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a routerLink="companies" class="nav-link" routerLinkActive="active">Company List</a>
-      </li>
-      <li class="nav-item">
-        <a routerLink="create-company" class="nav-link" routerLinkActive="active">Create Company</a>
-      </li>
-    </ul>
-  </nav></div>
-
-  <div fxLayout="row" fxShow="false" fxShow.gt-sm>
-    <button mat-button routerLink="/login" *ngIf="!isAuthenticated">
-      <mat-icon>power_settings_new</mat-icon>
-      Login
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <div>
+      <a>
+        <img width="60px" src="assets/trans.png">
+      </a>
+    </div>
+    <button mat-icon-button>
+      <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
     </button>
-    <button mat-button *ngIf="isAuthenticated" (click)="logout('/login')">
-      <mat-icon>exit_to_app</mat-icon>
-      Logout
-    </button>
-  </div>
+    <h3>GraceTrans</h3>
+    <span class="menu-spacer"></span>
+    <div *ngIf="isAuthenticated && user.company == 0">
+      <a mat-button [routerLink]="'/companies'"> Company </a>
+      <a mat-button [routerLink]="'/create-company'"> Create Company </a>
+      <a mat-button [routerLink]="'/users'"> Users </a>
+      <a mat-button [routerLink]="'/create-user'"> Create User </a>
+    </div>
+    <span class="fill-space"></span>
+    <div fxLayout="row" fxShow="false" fxShow.gt-sm>
+     <div *ngIf="isAuthenticated"><p>Welcome {{ user.username }}</p></div>
+      <button (click)="setDocTitle( 'Login' )" mat-button routerLink="/login" *ngIf="!isAuthenticated">
+        <mat-icon>power_settings_new</mat-icon>
+        Login
+      </button>
+      <button mat-button *ngIf="isAuthenticated" (click)="logout('/login')">
+        <mat-icon>exit_to_app</mat-icon>
+        Logout
+      </button>
+    </div>
+  </mat-toolbar-row>
 </mat-toolbar>
+<mat-sidenav-container>
+  <mat-sidenav #sidenav>
+    <mat-nav-list>
+      <a mat-list-item [routerLink]="'/create-move-cfs'"> Movement (Port to CFS) </a>
+      <a mat-list-item [routerLink]="'/create-account'"> Movement (Port/Cfs to Factory) </a>
+      <a mat-list-item [routerLink]="'/contacts'"> Movement (Empty) </a>
+      <a mat-list-item [routerLink]="'/create-contact'"> Billing1 </a>
+      <a mat-list-item [routerLink]="'/activities'"> Billing2 </a>
+      <a mat-list-item [routerLink]="'/create-activity'"> Maintenance </a>
+      <a mat-list-item [routerLink]="'/create-activity'"> Vehicle Details </a>
+      <a mat-list-item [routerLink]="'/create-activity'"> Purchase & Administration </a>
+      <a mat-list-item [routerLink]="'/create-activity'"> Master </a>
+      <a mat-list-item [routerLink]="'/create-activity'"> Cash voucher </a>
+      <a mat-list-item [routerLink]="'/create-activity'"> Diesel voucher </a>
+      <a mat-list-item [routerLink]="'/create-activity'"> Payroll </a>
 
-<router-outlet></router-outlet>
+      <a mat-list-item (click)="sidenav.toggle()" href="" mat-list-item>Close</a>
+
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div class="container">
+      <br>
+      <h2 style="text-align: center;">{{ title }}</h2>
+      <hr>
+      <div>
+        <div>
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+    </div>
+    <footer class="footer">
+      <div class="container">
+        <span>All Rights Reserved 2020 @GranceTrance</span>
+      </div>
+    </footer>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+
+

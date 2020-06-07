@@ -1,21 +1,24 @@
-<h3>Create Company</h3>
-<div [hidden]="submitted" style="width: 400px;">
-  <form (ngSubmit)="onSubmit()">
-    <div class="form-group">
-      <label for="firstName">Company Name</label>
-      <input type="text" class="form-control" id="firstName" required [(ngModel)]="company.name" name="firstName">
+<div style="width: 400px;">
+  <form [formGroup]="form"  (ngSubmit)="onSubmit()">
+    <div class="field">
+      <div class="form-group">
+      <label for="name">Company Name</label>
+      <input type="text" formControlName="name" class="form-control"  required id="name">
     </div>
-
+    </div>
+    <div class="field">
     <div class="form-group">
-      <label for="lastName">Description</label>
-      <input type="text" class="form-control" id="lastName" required [(ngModel)]="company.description" name="lastName">
+      <label for="description">Description</label>
+      <input type="text" formControlName="description" class="form-control" required id="description">
+    </div>
     </div>
 
     <button type="submit" class="btn btn-success">Submit</button>
+    &nbsp;&nbsp;
+    <button type="button" (click)="gotoList()" class="btn btn-danger">Cancel</button>
   </form>
 </div>
-
-<div [hidden]="!submitted">
-  <h4>You submitted successfully!</h4>
-  <!-- <button class="btn btn-success" (click)="newEmployee()">Add</button> -->
+<br>
+<div [hidden]="!error">
+  <h5><p class="help is-danger">{{ message }}!</p></h5>
 </div>

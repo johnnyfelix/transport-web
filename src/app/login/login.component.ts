@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '@app/_services';
 import { first } from 'rxjs/operators';
 import {User} from '@app/_models/user';
+import * as jwt_decode from 'jwt-decode';
 
 @Component({
   selector: 'app-login',
@@ -47,10 +48,12 @@ export class LoginComponent implements OnInit {
           .subscribe(
             res => {
               // store user details and jwt token in local storage to keep user logged in between page refreshes
-
+              var decodedToken = jwt_decode(res.token);
               localStorage.setItem('tr_token', res.token);
-              var user: User = {username: username,
-                'firstName':'Dummy',lastName:'Dummy', company:'Dummay'}
+              var sub = decodedToken['sub'];
+              var companyid = decodedToken['companyid'];
+              var user: User = {username: sub, company: companyid,
+              password:'',disabled:false}
               localStorage.setItem('currentUser', JSON.stringify(user));
               this.authService.currentUserSubject.next(user);
               this.authService.isAuthenticated.next(true);

@@ -1,7 +1,4 @@
 <div class="panel panel-primary">
-  <div class="panel-heading">
-    <h2>Company List</h2>
-  </div>
   <div class="panel-body">
     <table class="table table-striped">
       <thead>
@@ -9,16 +6,16 @@
           <th>Company</th>
           <th>Description</th>
           <th>Active</th>
-          <th>View</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let company of companies | async">
           <td>{{company.name}}</td>
           <td>{{company.description}}</td>
-          <td *ngIf="company.disabled">DISABLED</td>
-          <td *ngIf="!company.disabled">ENABLED</td>
-          <td>Users</td>
+          <td *ngIf="company.disabled"><button class="btn btn-danger" disabled>Inactive</button></td>
+          <td *ngIf="!company.disabled"><button class="btn btn-success" disabled>Active</button></td>
+          <td><a routerLink="/edit-company/{{company.id}}">Edit</a></td>
         </tr>
       </tbody>
     </table>

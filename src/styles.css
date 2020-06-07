@@ -1,11 +1,53 @@
 @import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
 @import "~bootstrap/dist/css/bootstrap.min.css";
 
-body {
-  margin: 0;
-  font-family: sans-serif;
+html,body{height:100%;}
+body{margin:0;font-family:Roboto, "Helvetica Neue", sans-serif;}
+form{width:420px;margin:35px auto 100px;display:block;float:none;}
+.mat-form-field{width:100%;}
+.misc-bottom-padding{margin:8px 0 20px;}
+.misc-bottom-padding mat-label{margin-right:15px;}
+.mat-radio-label{margin:0 15px 0 0;}
+.title-center{margin:0 auto;}
+.button-wrapper{margin-top:10px;}
+
+table {
+  width: 100%;
+  table-layout: fixed;
+}
+
+th, td {
+  overflow: hidden;
+  width: 80px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mat-column-transportDate {
+  flex: none;
+  width: 100px;
+}
+
+th.mat-sort-header-sorted {
+  color: black;
 }
 
 h1 {
   text-align: center;
+}
+
+form.submitted input.ng-invalid, input.ng-dirty.ng-invalid {
+  border: 1px solid red;
+}
+
+p {
+  font-family: Lato;
+}
+
+p.help.is-danger {
+  color: red;
+}
+
+p.help.is-success {
+  color: green;
 }
