@@ -14,6 +14,12 @@ import {ViewMoveCfsComponent} from '@app/view-move-cfs/view-move-cfs.component';
 
 const routes: Routes = [
   {
+    path: '',
+    component: HomeComponent,
+    data: {title: 'Grace Transport Solutions'},
+    canActivate: [ AuthGuardService ]
+  },
+  {
     path: 'home',
     component: HomeComponent,
     data: {title: 'Grace Transport Solutions'},

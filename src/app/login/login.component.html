@@ -1,22 +1,28 @@
-<mat-card>
-  <mat-card-content>
-    <form [formGroup]="form" (ngSubmit)="onSubmit()">
-      <mat-error *ngIf="loginInvalid">
-        The username and password were not recognised
-      </mat-error>
-      <mat-form-field class="full-width-input">
-        <input matInput placeholder="Username" formControlName="username" required>
-        <mat-error>
-          Please provide a valid username
+<div style="height:600px;background-image: url('assets/logistic.jpg'); background-size: cover;">
+  <br>
+  <br>
+  <mat-card>
+    <mat-card-content>
+      <h5>Login</h5>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <mat-error *ngIf="loginInvalid">
+          The username and password were not recognised
         </mat-error>
-      </mat-form-field>
-      <mat-form-field class="full-width-input">
-        <input matInput type="password" placeholder="Password" formControlName="password" required>
-        <mat-error>
-          Please provide a valid password
-        </mat-error>
-      </mat-form-field>
-      <button mat-raised-button color="primary">Login</button>
-    </form>
-  </mat-card-content>
-</mat-card>
+        <mat-form-field class="full-width-input">
+          <input matInput placeholder="Username" formControlName="username" required>
+          <mat-error>
+            Please provide a valid username
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="full-width-input">
+          <input matInput type="password" placeholder="Password" formControlName="password" required>
+          <mat-error>
+            Please provide a valid password
+          </mat-error>
+        </mat-form-field>
+        <button mat-raised-button color="primary">Login</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
+

@@ -5,7 +5,7 @@
         <img width="60px" src="assets/trans.png">
       </a>
     </div>
-    <button mat-icon-button>
+    <button *ngIf="isAuthenticated && user.company > 0" mat-icon-button>
       <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
     </button>
     <h3>GraceTrans</h3>
@@ -53,7 +53,7 @@
   <mat-sidenav-content>
     <div class="container">
       <br>
-      <h2 style="text-align: center;">{{ title }}</h2>
+      <h2 style="text-align: center; color: indigo;">{{ title }}</h2>
       <hr>
       <div>
         <div>
