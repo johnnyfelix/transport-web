@@ -1,22 +1,21 @@
-import { MovecfsService } from '@app/_services';
+import { MoveEmptyService } from '@app/_services';
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource,MatDialog } from '@angular/material';
 import { Router } from '@angular/router';
-import {Movecfs} from '@app/_models';
+import {Moveempty} from '@app/_models';
 import {Angular5Csv} from 'angular5-csv/dist/Angular5-csv';
 import {DialogBoxComponent} from '@app/dialog-box/dialog-box.component';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup} from '@angular/forms';
 import {formatDate} from '@angular/common';
-//import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
-  selector: "app-view-move-cfs",
-  templateUrl: "./view-move-cfs.component.html",
-  styleUrls: ["./view-move-cfs.component.css"]
+  selector: "app-view-move-empty",
+  templateUrl: "./view-move-empty.component.html",
+  styleUrls: ["./view-move-empty.component.css"]
 })
-export class ViewMoveCfsComponent implements OnInit {
+export class ViewMoveEmptyComponent implements OnInit {
 
-  movecfsList: Movecfs[] = [];
+  movecfsList: Moveempty[] = [];
   myForm: FormGroup;
   dataSource = new MatTableDataSource(this.movecfsList);
 
@@ -25,7 +24,7 @@ export class ViewMoveCfsComponent implements OnInit {
 
   displayedColumns: string[] = ['transportDate', 'movementType', 'size', 'containerNumber',
   'fromLocation', 'toLocation', 'via', 'advance', 'diesel', 'incentive', 'cashSundaries',
-    'lrNumber', 'vehicleNumber', 'doNumber', 'weight', 'action'];
+    'lrNumber', 'vehicleNumber', 'doNumber', 'doType','offloadReceipt', 'action'];
 
 
   options = {
@@ -37,10 +36,10 @@ export class ViewMoveCfsComponent implements OnInit {
     useBom: true,
     headers: ['ID', 'Transport Date', 'Movement Type', 'Size', 'Container Number',
       'From Location', 'To Location', 'Via', 'Advance', 'Diesel', 'Incentive', 'Cash Sundaries',
-      'LR Number', 'Vehicle Number', 'Do Number', 'Weight']
+      'LR Number', 'Vehicle Number', 'Do Number', 'Do Type', 'Offload Receipt']
   };
 
-  constructor(private movecfsService: MovecfsService,
+  constructor(private movecfsService: MoveEmptyService,
               private router: Router,
               public dialog: MatDialog,
               private fb: FormBuilder,) {}
@@ -54,7 +53,7 @@ export class ViewMoveCfsComponent implements OnInit {
   }
 
   loadData(){
-    this.movecfsService.getAllMoveCfs().subscribe(
+    this.movecfsService.getAllMoveEmpty().subscribe(
       data => {
         this.movecfsList = data;
         this.dataSource = new MatTableDataSource(this.movecfsList);
@@ -93,7 +92,7 @@ export class ViewMoveCfsComponent implements OnInit {
   filterData(){
     var fromDate = this.myForm.get('fromDate').value;
     var toDate = this.myForm.get('toDate').value;
-    this.movecfsService.filterMoveCfs(fromDate, toDate).subscribe(
+    this.movecfsService.filterMoveEmpty(fromDate, toDate).subscribe(
       data => {
         this.movecfsList = data;
         this.dataSource = new MatTableDataSource(this.movecfsList);
@@ -107,7 +106,7 @@ export class ViewMoveCfsComponent implements OnInit {
   }
 
   exportCsv(){
-    new Angular5Csv(this.movecfsList,'Movement_Port2CFS_Report', this.options);
+    new Angular5Csv(this.movecfsList,'Movement_Empty_Report', this.options);
   }
 
   openDialog(action,obj) {
@@ -132,7 +131,7 @@ export class ViewMoveCfsComponent implements OnInit {
   }
 
   deleteRowData(row_obj){
-    this.movecfsService.deleteMoveCfs(row_obj.movementPtcId).subscribe(
+    this.movecfsService.deleteMoveEmpty(row_obj.movementEmptyId).subscribe(
       data => {
         console.log("Deleted Success");
         this.loadData();

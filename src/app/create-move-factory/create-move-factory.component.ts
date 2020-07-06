@@ -1,18 +1,18 @@
-import { Movecfs } from '@app/_models';
+import { Movefactory } from '@app/_models';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { MovecfsService } from '@app/_services';
+import { MoveFactoryService } from '@app/_services';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {formatDate} from '@angular/common';
 
 @Component({
-  selector: 'app-create-move-cfs',
-  templateUrl: './create-move-cfs.component.html',
-  styleUrls: ['./create-move-cfs.component.css']
+  selector: 'app-create-move-factory',
+  templateUrl: './create-move-factory.component.html',
+  styleUrls: ['./create-move-factory.component.css']
 })
-export class CreateMoveCfsComponent implements OnInit {
+export class CreateMoveFactoryComponent implements OnInit {
 
-  movecfs: Movecfs;
+  movecfs: Movefactory;
   error: boolean;
   success: boolean;
   myForm: FormGroup;
@@ -20,7 +20,7 @@ export class CreateMoveCfsComponent implements OnInit {
   message: string;
 
   constructor(
-    private movecfsService: MovecfsService,
+    private movecfsService: MoveFactoryService,
     private fb: FormBuilder,
     private router: Router) { }
 
@@ -35,26 +35,56 @@ export class CreateMoveCfsComponent implements OnInit {
     this.myForm = this.fb.group({
       transportDate: ['', [Validators.required]],
       movementType: ['', [Validators.required]],
+      vehicleType: [''],
       size: [''],
       containerNumber: ['', [Validators.required]],
       fromLocation: ['', [Validators.required]],
       toLocation: ['', [Validators.required]],
-      via: [''],
+      cargoWeight: ['', [Validators.required]],
+      blNumber: [''],
+      pickupPoint: [''],
+      pickup_date: [''],
+      deliveryDate: [''],
+      timeIn: [''],
+      emptyIn: [''],
+      boeNo: [''],
+      consigneeNameAddress: ['', [Validators.required]],
+      contractType: [''],
+      poShipmentNo: [''],
+      noOfPackages: [''],
+      sealNo: [''],
       advance: ['', [Validators.pattern('^[-]?[0-9]*[.]?[0-9]{0,2}$')]],
       diesel: ['', [Validators.pattern('^[-]?[0-9]*[.]?[0-9]{0,2}$')]],
       incentive: ['', [Validators.pattern('^[-]?[0-9]*[.]?[0-9]{0,2}$')]],
       cashSundries: ['', [Validators.pattern('^[-]?[0-9]*[.]?[0-9]{0,2}$')]],
-      weight: [''],
-      lrNumber: ['', [Validators.required]],
+      lrNumber: [''],
       vehicleNumber: ['', [Validators.required]],
-      doNumber: ['', [Validators.required]],
+      doNumber: [''],
+      remark: [''],
+      otherExpenses: ['']
     })
   }
 
-  date(e) {
+  date1(e) {
 
     let convertDate = formatDate(new Date(e.target.value), 'yyyy-MM-dd', 'en-GB')
     this.myForm.get('transportDate').setValue(convertDate, {
+      onlyself: true
+    })
+  }
+
+  date2(e) {
+
+    let convertDate = formatDate(new Date(e.target.value), 'yyyy-MM-dd', 'en-GB')
+    this.myForm.get('transportDate').setValue(convertDate, {
+      onlyself: true
+    })
+  }
+
+  date3(e) {
+
+    let convertDate = formatDate(new Date(e.target.value), 'yyyy-MM-dd', 'en-GB')
+    this.myForm.get('deliveryDate').setValue(convertDate, {
       onlyself: true
     })
   }
@@ -68,13 +98,13 @@ export class CreateMoveCfsComponent implements OnInit {
       this.success = false;
       this.error = false;
       this.message = "";
-      this.movecfs = this.myForm.value as Movecfs;
+      this.movecfs = this.myForm.value as Movefactory;
       this.save();
     }
   }
 
   save() {
-    this.movecfsService.createMoveCfs(this.movecfs).subscribe(
+    this.movecfsService.createMoveFactory(this.movecfs).subscribe(
       data => {
         console.log(data);
         this.success = true;

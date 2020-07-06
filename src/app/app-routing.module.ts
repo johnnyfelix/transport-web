@@ -11,6 +11,10 @@ import {ResetPasswordComponent} from '@app/reset-password/reset-password.compone
 import {CreateUserComponent} from '@app/create-user/create-user.component';
 import {CreateMoveCfsComponent} from '@app/create-move-cfs/create-move-cfs.component';
 import {ViewMoveCfsComponent} from '@app/view-move-cfs/view-move-cfs.component';
+import {ViewMoveFactoryComponent} from '@app/view-move-factory/view-move-factory.component';
+import {ViewMoveEmptyComponent} from '@app/view-move-empty/view-move-empty.component';
+import {CreateMoveFactoryComponent} from '@app/create-move-factory/create-move-factory.component';
+import {CreateMoveEmptyComponent} from '@app/create-move-empty/create-move-empty.component';
 
 const routes: Routes = [
   {
@@ -79,9 +83,33 @@ const routes: Routes = [
     canActivate: [ AuthGuardService ]
   },
   {
+    path: 'create-move-factory',
+    data: {title: 'Movement (Port/CFS to Factory)'},
+    component: CreateMoveFactoryComponent,
+    canActivate: [ AuthGuardService ]
+  },
+  {
+    path: 'create-move-empty',
+    data: {title: 'Movement (Empty)'},
+    component: CreateMoveEmptyComponent,
+    canActivate: [ AuthGuardService ]
+  },
+  {
     path: 'view-move-cfs',
     data: {title: 'View Movement (Port to CFS)'},
     component: ViewMoveCfsComponent,
+    canActivate: [ AuthGuardService ]
+  },
+  {
+    path: 'view-move-factory',
+    data: {title: 'View Movement (Port/CFS to Factory)'},
+    component: ViewMoveFactoryComponent,
+    canActivate: [ AuthGuardService ]
+  },
+  {
+    path: 'view-move-empty',
+    data: {title: 'View Movement Empty'},
+    component: ViewMoveEmptyComponent,
     canActivate: [ AuthGuardService ]
   }
 ];

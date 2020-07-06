@@ -1,6 +1,6 @@
 <div class="wrapper">
   <div>
-    <button mat-flat-button routerLink="/create-move-cfs" color="primary">Back to Creation</button>
+    <button mat-flat-button routerLink="/create-move-empty" color="primary">Back to Creation</button>
   </div>
   <br>
 
@@ -95,9 +95,14 @@
       <td mat-cell *matCellDef="let movecfs"> {{movecfs.doNumber}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="weight">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Weight </th>
-      <td mat-cell *matCellDef="let movecfs"> {{movecfs.weight}} </td>
+    <ng-container matColumnDef="doType">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> DO Type </th>
+      <td mat-cell *matCellDef="let movecfs"> {{movecfs.doType}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="offloadReceipt">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Offload Receipt </th>
+      <td mat-cell *matCellDef="let movecfs"> {{movecfs.offloadReceipt}} </td>
     </ng-container>
 
     <ng-container matColumnDef="action">

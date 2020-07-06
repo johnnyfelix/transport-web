@@ -54,13 +54,14 @@ export class CreateUserComponent implements OnInit {
           //console.log(data);
           this.success = true;
           this.message = "User Created Successfully!"
+
         },
         error => {
           console.log(error);
           this.message = error.error.error;
           this.error = true;
         });
-    this.user = new User();
+
 
   }
 

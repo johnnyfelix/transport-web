@@ -9,3 +9,10 @@
 div{
   position:relative;
 }
+
+::ng-deep .mat-datepicker-content
+{
+  zoom: 0.85;
+  width: 600px;
+  height: 600px;
+}

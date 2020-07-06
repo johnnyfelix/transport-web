@@ -22,6 +22,12 @@ import { ResetPasswordComponent } from '@app/reset-password/reset-password.compo
 import { CreateUserComponent } from '@app/create-user/create-user.component';
 import { CreateMoveCfsComponent } from '@app/create-move-cfs/create-move-cfs.component';
 import { ViewMoveCfsComponent } from '@app/view-move-cfs/view-move-cfs.component';
+import {DialogBoxComponent} from '@app/dialog-box/dialog-box.component';
+import {MAT_DATE_LOCALE} from '@angular/material';
+import {ViewMoveFactoryComponent} from '@app/view-move-factory/view-move-factory.component';
+import {ViewMoveEmptyComponent} from '@app/view-move-empty/view-move-empty.component';
+import {CreateMoveFactoryComponent} from '@app/create-move-factory/create-move-factory.component';
+import {CreateMoveEmptyComponent} from '@app/create-move-empty/create-move-empty.component';
 
 
 @NgModule({
@@ -40,9 +46,14 @@ import { ViewMoveCfsComponent } from '@app/view-move-cfs/view-move-cfs.component
     ResetPasswordComponent,
     CreateUserComponent,
     CreateMoveCfsComponent,
-    ViewMoveCfsComponent
+    CreateMoveFactoryComponent,
+    CreateMoveEmptyComponent,
+    ViewMoveCfsComponent,
+    DialogBoxComponent,
+    ViewMoveFactoryComponent,
+    ViewMoveEmptyComponent
   ],
-  entryComponents: [ControlErrorComponent],
+  entryComponents: [ControlErrorComponent, DialogBoxComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -55,7 +66,8 @@ import { ViewMoveCfsComponent } from '@app/view-move-cfs/view-move-cfs.component
   ],
   providers: [
     Title,
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    {provide: MAT_DATE_LOCALE, useValue: 'en-GB'}
    // { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
     ],
   bootstrap: [AppComponent],

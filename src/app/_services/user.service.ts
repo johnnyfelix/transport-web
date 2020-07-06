@@ -11,7 +11,7 @@ export class UserService {
   }
 
   getAll() {
-    return this.http.get<User[]>(`${environment.apiUrl}/user`);
+    return this.http.get<User[]>(`${environment.apiUrl}/users`);
   }
 
   createUser(user: User): Observable<Object> {

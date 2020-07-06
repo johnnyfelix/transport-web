@@ -1,10 +1,10 @@
 <!-- wrapper -->
 <mat-toolbar color="warn">
   <mat-toolbar-row>
-    <h3>Create Movement (Port to CFS)</h3>
+    <h3>Create Movement (Empty)</h3>
     <span class="fill-space"></span>
     <div fxLayout="row" fxShow="false" fxShow.gt-sm>
-      <button mat-flat-button routerLink="/view-move-cfs" color="primary">View Movement records</button>
+      <button mat-flat-button routerLink="/view-move-empty" color="primary">View Movement records</button>
     </div>
   </mat-toolbar-row>
 </mat-toolbar>
@@ -72,11 +72,6 @@
         </mat-error>
       </mat-form-field>
 
-
-      <mat-form-field class="example-full-width">
-        <input matInput placeholder="Weight" formControlName="weight">
-      </mat-form-field>
-
       <mat-form-field class="example-full-width">
         <input matInput placeholder="Vehicle Number" formControlName="vehicleNumber">
       </mat-form-field>
@@ -87,6 +82,14 @@
 
       <mat-form-field class="example-full-width">
         <input matInput placeholder="DO Number" formControlName="doNumber">
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="DO Type" formControlName="doType">
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Offload Receipt" formControlName="offloadReceipt">
       </mat-form-field>
 
       <!-- Submit -->

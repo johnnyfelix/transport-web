@@ -6,33 +6,33 @@ import {environment} from '@environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class MovecfsService {
+export class MoveEmptyService {
 
-  private baseUrl = `${environment.apiUrl}/movementP2C`;
+  private baseUrl = `${environment.apiUrl}/movementEmpty`;
 
   constructor(private http: HttpClient) { }
 
-  getMoveCfs(id: number): Observable<any> {
+  getMoveEmpty(id: number): Observable<any> {
     return this.http.get(`${this.baseUrl}/id/${id}`);
   }
 
-  createMoveCfs(movecfs: Object): Observable<Object> {
-    return this.http.post(`${this.baseUrl}`, movecfs);
+  createMoveEmpty(moveEmpty: Object): Observable<Object> {
+    return this.http.post(`${this.baseUrl}`, moveEmpty);
   }
 
-  updateMoveCfs(value: any): Observable<Object> {
+  updateMoveEmpty(value: any): Observable<Object> {
     return this.http.put(`${this.baseUrl}`, value);
   }
 
-  deleteMoveCfs(id: number): Observable<Object> {
+  deleteMoveEmpty(id: number): Observable<Object> {
     return this.http.delete(`${this.baseUrl}/${id}`);
   }
 
-  getAllMoveCfs(): Observable<any> {
+  getAllMoveEmpty(): Observable<any> {
     return this.http.get(`${this.baseUrl}`);
   }
 
-  filterMoveCfs(fromDate: any, toDate: any): Observable<any>{
+  filterMoveEmpty(fromDate: any, toDate: any): Observable<any>{
     return this.http.get(`${this.baseUrl}?fromDate=${fromDate}&toDate=${toDate}`);
   }
 }

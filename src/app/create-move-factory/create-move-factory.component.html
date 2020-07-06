@@ -1,10 +1,10 @@
 <!-- wrapper -->
 <mat-toolbar color="warn">
   <mat-toolbar-row>
-    <h3>Create Movement (Port to CFS)</h3>
+    <h3>Create Movement (Port/CFS to Factory)</h3>
     <span class="fill-space"></span>
     <div fxLayout="row" fxShow="false" fxShow.gt-sm>
-      <button mat-flat-button routerLink="/view-move-cfs" color="primary">View Movement records</button>
+      <button mat-flat-button routerLink="/view-move-factory" color="primary">View Movement records</button>
     </div>
   </mat-toolbar-row>
 </mat-toolbar>
@@ -14,10 +14,10 @@
 
       <!-- Date picker -->
       <mat-form-field>
-        <input matInput readonly [matDatepicker]="picker" placeholder="Date of Transport" formControlName="transportDate"
-               (dateChange)="date($event)">
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
+        <input matInput readonly [matDatepicker]="picker1" placeholder="Date of Transport" formControlName="transportDate"
+               (dateChange)="date1($event)">
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
       </mat-form-field>
 
       <mat-form-field class="example-full-width">
@@ -25,7 +25,11 @@
       </mat-form-field>
 
       <mat-form-field class="example-full-width">
-        <input matInput placeholder="size" formControlName="size">
+        <input matInput placeholder="Vehicle Type" formControlName="vehicleType">
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Size" formControlName="size">
       </mat-form-field>
 
       <mat-form-field class="example-full-width">
@@ -41,7 +45,65 @@
       </mat-form-field>
 
       <mat-form-field class="example-full-width">
-        <input matInput placeholder="Via" formControlName="via">
+        <input matInput placeholder="Cargo Weight" formControlName="cargoWeight">
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="BL Number" formControlName="blNumber">
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Pickup Point" formControlName="pickupPoint">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput readonly [matDatepicker]="picker2" placeholder="Pickup Date" formControlName="pickup_date"
+               (dateChange)="date2($event)">
+        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput readonly [matDatepicker]="picker3" placeholder="Delivery Date" formControlName="deliveryDate"
+               (dateChange)="date3($event)">
+        <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+        <mat-datepicker #picker3></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Delivery Date" formControlName="deliveryDate">
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Time In" formControlName="timeIn">
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Empty In" formControlName="emptyIn">
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="BOE No" formControlName="boeNo">
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Consignee Name Address" formControlName="consigneeNameAddress">
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Contract Type" formControlName="contractType">
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="PO Shipment No" formControlName="poShipmentNo">
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="No Of Packages" formControlName="noOfPackages">
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Seal No" formControlName="sealNo">
       </mat-form-field>
 
       <mat-form-field class="example-full-width">
@@ -70,11 +132,6 @@
         <mat-error *ngIf="errorHandling('cashSundries', 'pattern')">
           You must provide valid number for <strong>Incentive</strong>
         </mat-error>
-      </mat-form-field>
-
-
-      <mat-form-field class="example-full-width">
-        <input matInput placeholder="Weight" formControlName="weight">
       </mat-form-field>
 
       <mat-form-field class="example-full-width">

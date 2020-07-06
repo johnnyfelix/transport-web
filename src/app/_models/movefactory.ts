@@ -1,0 +1,32 @@
+﻿export class Movefactory {
+  movementPtfId: number;
+  transportDate: string;
+  movementType: string;
+  vehicleType: string;
+  size: string;
+  containerNumber: string;
+  fromLocation: string;
+  toLocation: string;
+  cargoWeight: string;
+  blNumber: string;
+  pickupPoint: string;
+  pickup_date: string;
+  deliveryDate: string;
+  timeIn: string;
+  emptyIn: string;
+  boeNo: string;
+  consigneeNameAddress: string;
+  contractType: string;
+  poShipmentNo: string;
+  noOfPackages: number;
+  sealNo: string;
+  advance: number;
+  diesel: number;
+  incentive: number;
+  cashSundaries: number;
+  lrNumber: string;
+  vehicleNumber: string;
+  doNumber: string;
+  remark: string;
+  otherExpenses: string;
+}
