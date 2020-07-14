@@ -24,7 +24,6 @@ export class UsersComponent implements OnInit {
   }
 
   disableEnableUser(username: string,activate: boolean){
-    console.log(" disableEnableUser "+username+";disable:"+activate)
     var user: Object = {'username': username, 'disabled': activate};
     this.userService.disableUser(user).subscribe(
       data => {

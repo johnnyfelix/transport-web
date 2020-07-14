@@ -23,9 +23,9 @@ export class ViewMoveCfsComponent implements OnInit {
   @ViewChild(MatPaginator,{static: false}  ) paginator;
   @ViewChild(MatSort,{static: false}) sort;
 
-  displayedColumns: string[] = ['transportDate', 'movementType', 'size', 'containerNumber',
+  displayedColumns: string[] = ['serial', 'movementPtcId', 'transportDate', 'movementType', 'size', 'containerNumber',
   'fromLocation', 'toLocation', 'via', 'advance', 'diesel', 'incentive', 'cashSundaries',
-    'lrNumber', 'vehicleNumber', 'doNumber', 'weight', 'action'];
+    'lrNumber', 'vehicleNumber', 'doNumber', 'weight'];
 
 
   options = {
@@ -35,7 +35,7 @@ export class ViewMoveCfsComponent implements OnInit {
     showLabels: true,
     showTitle: false,
     useBom: true,
-    headers: ['ID', 'Transport Date', 'Movement Type', 'Size', 'Container Number',
+    headers: ['SL No', 'Transport Date', 'Movement Type', 'Size', 'Container Number',
       'From Location', 'To Location', 'Via', 'Advance', 'Diesel', 'Incentive', 'Cash Sundaries',
       'LR Number', 'Vehicle Number', 'Do Number', 'Weight']
   };
@@ -90,6 +90,16 @@ export class ViewMoveCfsComponent implements OnInit {
     this.loadData();
   }
 
+  addSLNotoList(){
+    let i = 1;
+    var movecfsArray: Array<Movecfs> =[];
+    for (var movecfs of this.movecfsList) {
+      movecfs.movementPtcId = i++;
+      movecfsArray.push(movecfs);
+    }
+    return movecfsArray;
+  }
+
   filterData(){
     var fromDate = this.myForm.get('fromDate').value;
     var toDate = this.myForm.get('toDate').value;
@@ -107,7 +117,7 @@ export class ViewMoveCfsComponent implements OnInit {
   }
 
   exportCsv(){
-    new Angular5Csv(this.movecfsList,'Movement_Port2CFS_Report', this.options);
+    new Angular5Csv(this.addSLNotoList(),'Movement_Port2CFS_Report', this.options);
   }
 
   openDialog(action,obj) {

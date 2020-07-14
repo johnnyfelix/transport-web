@@ -22,9 +22,9 @@ export class ViewMoveEmptyComponent implements OnInit {
   @ViewChild(MatPaginator,{static: false}  ) paginator;
   @ViewChild(MatSort,{static: false}) sort;
 
-  displayedColumns: string[] = ['transportDate', 'movementType', 'size', 'containerNumber',
+  displayedColumns: string[] = ['serial', 'movementEmptyId', 'transportDate', 'movementType', 'size', 'containerNumber',
   'fromLocation', 'toLocation', 'via', 'advance', 'diesel', 'incentive', 'cashSundaries',
-    'lrNumber', 'vehicleNumber', 'doNumber', 'doType','offloadReceipt', 'action'];
+    'lrNumber', 'vehicleNumber', 'doNumber', 'doType','offloadReceipt'];
 
 
   options = {
@@ -34,7 +34,7 @@ export class ViewMoveEmptyComponent implements OnInit {
     showLabels: true,
     showTitle: false,
     useBom: true,
-    headers: ['ID', 'Transport Date', 'Movement Type', 'Size', 'Container Number',
+    headers: ['SL No', 'Transport Date', 'Movement Type', 'Size', 'Container Number',
       'From Location', 'To Location', 'Via', 'Advance', 'Diesel', 'Incentive', 'Cash Sundaries',
       'LR Number', 'Vehicle Number', 'Do Number', 'Do Type', 'Offload Receipt']
   };
@@ -105,8 +105,18 @@ export class ViewMoveEmptyComponent implements OnInit {
     );
   }
 
+  addSLNotoList(){
+    let i = 1;
+    var movecfsArray: Array<Moveempty> =[];
+    for (var movecfs of this.movecfsList) {
+      movecfs.movementEmptyId = i++;
+      movecfsArray.push(movecfs);
+    }
+    return movecfsArray;
+  }
+
   exportCsv(){
-    new Angular5Csv(this.movecfsList,'Movement_Empty_Report', this.options);
+    new Angular5Csv(this.addSLNotoList(),'Movement_Empty_Report', this.options);
   }
 
   openDialog(action,obj) {

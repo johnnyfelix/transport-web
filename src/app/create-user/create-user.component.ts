@@ -58,7 +58,7 @@ export class CreateUserComponent implements OnInit {
         },
         error => {
           console.log(error);
-          this.message = error.error.error;
+          this.message = error.error.message;
           this.error = true;
         });
 

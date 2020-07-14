@@ -2,10 +2,6 @@
 <mat-toolbar color="warn">
   <mat-toolbar-row>
     <h3>Create Movement (Port/CFS to Factory)</h3>
-    <span class="fill-space"></span>
-    <div fxLayout="row" fxShow="false" fxShow.gt-sm>
-      <button mat-flat-button routerLink="/view-move-factory" color="primary">View Movement records</button>
-    </div>
   </mat-toolbar-row>
 </mat-toolbar>
 <mat-sidenav-container>
@@ -21,11 +17,27 @@
       </mat-form-field>
 
       <mat-form-field class="example-full-width">
-        <input matInput placeholder="Movement Type" formControlName="movementType">
+        <input matInput placeholder="Movement Type" formControlName="movementType" (change)="inputChanged('movementType', $event)" [matAutocomplete]="movement">
+        <mat-autocomplete #movement="matAutocomplete">
+          <mat-option *ngFor="let option of masterMovementType | async" [value]="option">
+            {{option}}
+          </mat-option>
+        </mat-autocomplete>
+        <mat-error *ngIf="errorHandling('movementType', 'incorrect')">
+          Please select a Movement type  from the List
+        </mat-error>
       </mat-form-field>
 
       <mat-form-field class="example-full-width">
-        <input matInput placeholder="Vehicle Type" formControlName="vehicleType">
+        <input matInput placeholder="Vehicle Type" [matAutocomplete]="vehicletype" (change)="inputChanged('vehicleType', $event)" formControlName="vehicleType">
+        <mat-autocomplete #vehicletype="matAutocomplete">
+          <mat-option *ngFor="let option of masterVehicleType | async" [value]="option">
+            {{option}}
+          </mat-option>
+        </mat-autocomplete>
+        <mat-error *ngIf="errorHandling('vehicleType', 'incorrect')">
+          Please select a Movement type  from the List
+        </mat-error>
       </mat-form-field>
 
       <mat-form-field class="example-full-width">
@@ -37,12 +49,26 @@
       </mat-form-field>
 
       <mat-form-field class="example-full-width">
-        <input matInput placeholder="From Location" formControlName="fromLocation">
+        <input matInput placeholder="From Location" (change)="inputChanged('fromLocation', $event)" formControlName="fromLocation" [matAutocomplete]="port">
+        <mat-autocomplete #port="matAutocomplete">
+          <mat-option *ngFor="let option of masterPort | async" [value]="option">
+            {{option}}
+          </mat-option>
+        </mat-autocomplete>
+        <mat-error *ngIf="errorHandling('fromLocation', 'incorrect')">
+          Please select a Location  from the List
+        </mat-error>
       </mat-form-field>
 
       <mat-form-field class="example-full-width">
-        <input matInput placeholder="To Location" formControlName="toLocation">
+        <input matInput placeholder="To Location" formControlName="toLocation" [matAutocomplete]="cfs">
+        <mat-autocomplete #cfs="matAutocomplete">
+          <mat-option *ngFor="let option of masterCFS | async" [value]="option">
+            {{option}}
+          </mat-option>
+        </mat-autocomplete>
       </mat-form-field>
+
 
       <mat-form-field class="example-full-width">
         <input matInput placeholder="Cargo Weight" formControlName="cargoWeight">
@@ -79,6 +105,10 @@
       </mat-form-field>
 
       <mat-form-field class="example-full-width">
+        <input matInput placeholder="Time Out" formControlName="timeOut">
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
         <input matInput placeholder="Empty In" formControlName="emptyIn">
       </mat-form-field>
 
@@ -87,7 +117,15 @@
       </mat-form-field>
 
       <mat-form-field class="example-full-width">
-        <input matInput placeholder="Consignee Name Address" formControlName="consigneeNameAddress">
+        <input matInput placeholder="Consignee Name Address" formControlName="consigneeNameAddress"  [matAutocomplete]="consignee">
+        <mat-autocomplete #consignee="matAutocomplete" (optionSelected)="consigneeSelected($event)"  [displayWith]="displayWith" >
+          <mat-option *ngFor="let option of filteredConsignee | async" [value]="option">
+            {{option.name}}
+          </mat-option>
+        </mat-autocomplete>
+        <mat-error *ngIf="errorHandling('consigneeNameAddress', 'incorrect')">
+          Please select a Consignee from the List
+        </mat-error>
       </mat-form-field>
 
       <mat-form-field class="example-full-width">
@@ -135,7 +173,15 @@
       </mat-form-field>
 
       <mat-form-field class="example-full-width">
-        <input matInput placeholder="Vehicle Number" formControlName="vehicleNumber">
+        <input matInput placeholder="Vehicle Number"  formControlName="vehicleNumber" [matAutocomplete]="vehicle" >
+        <mat-autocomplete #vehicle="matAutocomplete"  [displayWith]="displayFn" (optionSelected)="vehicleSelected($event)">
+          <mat-option *ngFor="let option of filteredVehicles | async" [value]="option">
+            {{option.number}}
+          </mat-option>
+        </mat-autocomplete>
+        <mat-error *ngIf="errorHandling('vehicleNumber', 'incorrect')">
+          Please select a Vehicle Number from the List
+        </mat-error>
       </mat-form-field>
 
       <mat-form-field class="example-full-width">

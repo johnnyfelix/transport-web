@@ -1,0 +1,35 @@
+<div>
+  <button mat-flat-button routerLink="/create-driver-master" color="primary">Create Driver Master</button>
+</div>
+<br>
+<div>
+<input [(ngModel)]="searchTerm" (ngModelChange)="onSearchTermChange()" matTooltip="Search" placeholder="Search" />
+</div>
+<br>
+<div class="panel panel-primary">
+  <div class="panel-body">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Sl No</th>
+          <th>Driver Name</th>
+          <th>Licence Number</th>
+          <th>Employee Code</th>
+          <th>Aadhar Number</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let master of masters | async; let i=index">
+          <td>{{ i+1 }}</td>
+          <td>{{ master.name }}</td>
+          <td>{{ master.lcNumber }}</td>
+          <td>{{ master.employeeCode }}</td>
+          <td>{{ master.aCard }}</td>
+          <td><button (click)="deleteDriver(''+master.id+'')" class="btn btn-danger">Delete</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+

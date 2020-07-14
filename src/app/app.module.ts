@@ -28,6 +28,15 @@ import {ViewMoveFactoryComponent} from '@app/view-move-factory/view-move-factory
 import {ViewMoveEmptyComponent} from '@app/view-move-empty/view-move-empty.component';
 import {CreateMoveFactoryComponent} from '@app/create-move-factory/create-move-factory.component';
 import {CreateMoveEmptyComponent} from '@app/create-move-empty/create-move-empty.component';
+import {VehicleMasterComponent} from '@app/vehicle-master/vehicle-master.component';
+import {ConsigneeMasterComponent} from '@app/consignee-master/consignee-master.component';
+import {CreateVehicleMasterComponent} from '@app/create-vehicle-master/create-vehicle-master.component';
+import {CreateConsigneeMasterComponent} from '@app/create-consignee-master/create-consignee-master.component';
+import {DriverMasterComponent} from '@app/driver-master/driver-master.component';
+import {CreateDriverMasterComponent} from '@app/create-driver-master/create-driver-master.component';
+import {FactoryMasterComponent} from '@app/factory-master/factory-master.component';
+import {CreateFactoryMasterComponent} from '@app/create-factory-master/create-factory-master.component';
+import {AdminMasterComponent} from '@app/admin-master/admin-master.component';
 
 
 @NgModule({
@@ -51,7 +60,16 @@ import {CreateMoveEmptyComponent} from '@app/create-move-empty/create-move-empty
     ViewMoveCfsComponent,
     DialogBoxComponent,
     ViewMoveFactoryComponent,
-    ViewMoveEmptyComponent
+    ViewMoveEmptyComponent,
+    VehicleMasterComponent,
+    ConsigneeMasterComponent,
+    CreateVehicleMasterComponent,
+    CreateConsigneeMasterComponent,
+    DriverMasterComponent,
+    CreateDriverMasterComponent,
+    FactoryMasterComponent,
+    CreateFactoryMasterComponent,
+    AdminMasterComponent
   ],
   entryComponents: [ControlErrorComponent, DialogBoxComponent],
   imports: [

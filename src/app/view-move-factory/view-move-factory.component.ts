@@ -22,10 +22,10 @@ export class ViewMoveFactoryComponent implements OnInit {
   @ViewChild(MatPaginator,{static: false}  ) paginator;
   @ViewChild(MatSort,{static: false}) sort;
 
-  displayedColumns: string[] = ['transportDate', 'movementType', 'size', 'containerNumber',
+  displayedColumns: string[] = ['serial', 'movementPtfId', 'transportDate', 'movementType', 'size', 'containerNumber',
   'fromLocation', 'toLocation', 'cargoWeight','pickupPoint','pickup_date',
-    'deliveryDate','timeIn','emptyIn','advance', 'diesel','lrNumber',
-    'vehicleNumber', 'doNumber', 'action'];
+    'deliveryDate','timeIn', 'timeOut', 'emptyIn','diesel','lrNumber',
+    'vehicleNumber', 'doNumber'];
 
 
   options = {
@@ -35,8 +35,8 @@ export class ViewMoveFactoryComponent implements OnInit {
     showLabels: true,
     showTitle: false,
     useBom: true,
-    headers: ['ID','Transport Date','Movement Type','Vehicle Type','Size','Container Number','From Location',
-      'To Location','Cargo Weight','BL Number','Pickup Point','Pickup Date','Delivery Date','Time In',
+    headers: ['SL NO','Transport Date','Movement Type','Vehicle Type','Size','Container Number','From Location',
+      'To Location','Cargo Weight','BL Number','Pickup Point','Pickup Date','Delivery Date','Time In','Time Out',
       'Empty In','BOE No','Consignee Name Address','Contract Type','Po Shipment No','No Of Packages','Seal No','Advance',
       'Diesel','Incentive','Cash Sundaries','LR Number','Vehicle Number','DO Number','Remark','Other Expenses']
   };
@@ -107,8 +107,18 @@ export class ViewMoveFactoryComponent implements OnInit {
     );
   }
 
+  addSLNotoList(){
+    let i = 1;
+    var movecfsArray: Array<Movefactory> =[];
+    for (var movecfs of this.movecfsList) {
+      movecfs.movementPtfId = i++;
+      movecfsArray.push(movecfs);
+    }
+    return movecfsArray;
+  }
+
   exportCsv(){
-    new Angular5Csv(this.movecfsList,'Movement_PortCFS_TO_Factory_Report', this.options);
+    new Angular5Csv(this.addSLNotoList(),'Movement_PortCFS_TO_Factory_Report', this.options);
   }
 
   openDialog(action,obj) {

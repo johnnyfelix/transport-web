@@ -3,3 +3,8 @@ export * from './company';
 export * from './movecfs'
 export * from './movefactory'
 export * from './moveempty'
+export * from './vehicleMaster'
+export * from './consigneeMaster'
+export * from './adminMaster'
+export * from './driverMaster'
+export * from './factoryMaster'

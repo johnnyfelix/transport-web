@@ -1,0 +1,51 @@
+<div style="width: 400px;">
+  <form [formGroup]="form"  (ngSubmit)="onSubmit()">
+    <div class="field">
+      <div class="form-group">
+      <label for="number">Vehicle Number</label>
+      <input type="text" formControlName="number" class="form-control"  id="number">
+    </div>
+    </div>
+    <div class="field">
+    <div class="form-group">
+      <label for="make">Make</label>
+      <input type="text" formControlName="make" class="form-control" id="make">
+    </div>
+    </div>
+
+    <div class="field">
+      <div class="form-group">
+        <label for="chasis">Chassis</label>
+        <input type="text" formControlName="chasis" class="form-control" id="chasis">
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="form-group">
+        <label for="engine">Engine</label>
+        <input type="text" formControlName="engine" class="form-control" id="engine">
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="form-group">
+        <label for="vehicleType">Vehicle Type</label>
+        <input type="text" formControlName="vehicleType" class="form-control" id="vehicleType">
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-success">Submit</button>
+    &nbsp;&nbsp;
+    <button type="button" (click)="gotoList()" class="btn btn-danger">Back</button>
+    <br>
+    <br>
+    <div [hidden]="!success">
+      <h5><p class="help is-success">{{ message }}</p></h5>
+    </div>
+    <div [hidden]="!error">
+      <h5><p class="help is-danger">{{ message }}!</p></h5>
+    </div>
+  </form>
+
+</div>
+

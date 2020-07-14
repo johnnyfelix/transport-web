@@ -15,6 +15,15 @@ import {ViewMoveFactoryComponent} from '@app/view-move-factory/view-move-factory
 import {ViewMoveEmptyComponent} from '@app/view-move-empty/view-move-empty.component';
 import {CreateMoveFactoryComponent} from '@app/create-move-factory/create-move-factory.component';
 import {CreateMoveEmptyComponent} from '@app/create-move-empty/create-move-empty.component';
+import {VehicleMasterComponent} from '@app/vehicle-master/vehicle-master.component';
+import {ConsigneeMasterComponent} from '@app/consignee-master/consignee-master.component';
+import {CreateVehicleMasterComponent} from '@app/create-vehicle-master/create-vehicle-master.component';
+import {CreateConsigneeMasterComponent} from '@app/create-consignee-master/create-consignee-master.component';
+import {CreateDriverMasterComponent} from '@app/create-driver-master/create-driver-master.component';
+import {DriverMasterComponent} from '@app/driver-master/driver-master.component';
+import {FactoryMasterComponent} from '@app/factory-master/factory-master.component';
+import {CreateFactoryMasterComponent} from '@app/create-factory-master/create-factory-master.component';
+import {AdminMasterComponent} from '@app/admin-master/admin-master.component';
 
 const routes: Routes = [
   {
@@ -96,20 +105,74 @@ const routes: Routes = [
   },
   {
     path: 'view-move-cfs',
-    data: {title: 'View Movement (Port to CFS)'},
+    data: {title: 'Report - Movement (Port to CFS)'},
     component: ViewMoveCfsComponent,
     canActivate: [ AuthGuardService ]
   },
   {
     path: 'view-move-factory',
-    data: {title: 'View Movement (Port/CFS to Factory)'},
+    data: {title: 'Report - Movement (Port/CFS to Factory)'},
     component: ViewMoveFactoryComponent,
     canActivate: [ AuthGuardService ]
   },
   {
     path: 'view-move-empty',
-    data: {title: 'View Movement Empty'},
+    data: {title: 'Report - Movement (Empty)'},
     component: ViewMoveEmptyComponent,
+    canActivate: [ AuthGuardService ]
+  },
+  {
+    path: 'vehicle-master',
+    data: {title: 'Vehicle Master'},
+    component: VehicleMasterComponent,
+    canActivate: [ AuthGuardService ]
+  },
+  {
+    path: 'consignee-master',
+    data: {title: 'consignee Master'},
+    component: ConsigneeMasterComponent,
+    canActivate: [ AuthGuardService ]
+  },
+  {
+    path: 'create-vehicle-master',
+    data: {title: 'Create Vehicle Master'},
+    component: CreateVehicleMasterComponent,
+    canActivate: [ AuthGuardService ]
+  },
+  {
+    path: 'create-consignee-master',
+    data: {title: 'Create Consignee Master'},
+    component: CreateConsigneeMasterComponent,
+    canActivate: [ AuthGuardService ]
+  },
+  {
+    path: 'create-driver-master',
+    data: {title: 'Create Driver Master'},
+    component: CreateDriverMasterComponent,
+    canActivate: [ AuthGuardService ]
+  },
+  {
+    path: 'driver-master',
+    data: {title: 'Driver Master'},
+    component: DriverMasterComponent,
+    canActivate: [ AuthGuardService ]
+  },
+  {
+    path: 'factory-master',
+    data: {title: 'Factory Master'},
+    component: FactoryMasterComponent,
+    canActivate: [ AuthGuardService ]
+  },
+  {
+    path: 'admin-master',
+    data: {title: 'Admin Master'},
+    component: AdminMasterComponent,
+    canActivate: [ AuthGuardService ]
+  },
+  {
+    path: 'create-factory-master',
+    data: {title: 'Create Factory Master'},
+    component: CreateFactoryMasterComponent,
     canActivate: [ AuthGuardService ]
   }
 ];

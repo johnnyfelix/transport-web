@@ -13,6 +13,7 @@
   pickup_date: string;
   deliveryDate: string;
   timeIn: string;
+  timeOut: string;
   emptyIn: string;
   boeNo: string;
   consigneeNameAddress: string;

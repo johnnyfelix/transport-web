@@ -42,7 +42,7 @@ export class CreateCompanyComponent implements OnInit {
         },
         error => {
           //console.log(error);
-          this.message = error.error.error;
+          this.message = error.error.message;
           this.error = true;
         });
     this.company = new Company();

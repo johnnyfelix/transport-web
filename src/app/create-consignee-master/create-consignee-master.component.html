@@ -1,0 +1,44 @@
+<div style="width: 400px;">
+  <form [formGroup]="form"  (ngSubmit)="onSubmit()">
+    <div class="field">
+      <div class="form-group">
+      <label for="name">Consignee Name</label>
+      <input type="text" formControlName="name" class="form-control"  required id="name">
+    </div>
+    </div>
+    <div class="field">
+    <div class="form-group">
+      <label for="address">Address</label>
+      <input type="text" formControlName="address" class="form-control" required id="address">
+    </div>
+    </div>
+
+    <div class="field">
+      <div class="form-group">
+        <label for="gst">GST</label>
+        <input type="text" formControlName="gst" class="form-control" required id="gst">
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="form-group">
+        <label for="pan">PAN Number</label>
+        <input type="text" formControlName="pan" class="form-control" required id="pan">
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-success">Submit</button>
+    &nbsp;&nbsp;
+    <button type="button" (click)="gotoList()" class="btn btn-danger">Back</button>
+    <br>
+    <br>
+    <div [hidden]="!success">
+      <h5><p class="help is-success">{{ message }}</p></h5>
+    </div>
+    <div [hidden]="!error">
+      <h5><p class="help is-danger">{{ message }}!</p></h5>
+    </div>
+  </form>
+
+</div>
+

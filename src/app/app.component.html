@@ -15,6 +15,7 @@
       <a mat-button [routerLink]="'/create-company'"> Create Company </a>
       <a mat-button [routerLink]="'/users'"> Users </a>
       <a mat-button [routerLink]="'/create-user'"> Create User </a>
+      <a mat-button [routerLink]="'/admin-master'"> Admin Master </a>
     </div>
     <span class="fill-space"></span>
     <div fxLayout="row" fxShow="false" fxShow.gt-sm>
@@ -36,8 +37,11 @@
       <a mat-list-item [routerLink]="'/create-move-cfs'"> Movement (Port to CFS) </a>
       <a mat-list-item [routerLink]="'/create-move-factory'"> Movement (Port/Cfs to Factory) </a>
       <a mat-list-item [routerLink]="'/create-move-empty'"> Movement (Empty) </a>
-      <a mat-list-item [routerLink]="'/create-activity'"> Vehicle Master </a>
-      <a mat-list-item [routerLink]="'/create-activity'"> Consignee Master </a>
+      <a mat-list-item [routerLink]="'/vehicle-master'"> Vehicle Master </a>
+      <a mat-list-item [routerLink]="'/consignee-master'"> Consignee Master </a>
+      <a mat-list-item [routerLink]="'/driver-master'"> Driver Master </a>
+      <a mat-list-item [routerLink]="'/factory-master'"> Factory Master </a>
+      <a mat-list-item [routerLink]="'/view-move-cfs'"> Reports </a>
       <a mat-list-item [routerLink]="'/create-contact'"> Billing1 </a>
       <a mat-list-item [routerLink]="'/activities'"> Billing2 </a>
       <a mat-list-item [routerLink]="'/create-activity'"> Maintenance </a>

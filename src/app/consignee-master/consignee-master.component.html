@@ -1,0 +1,35 @@
+<div>
+  <button mat-flat-button routerLink="/create-consignee-master" color="primary">Create Consignee Master</button>
+</div>
+<br>
+<div>
+  <input [(ngModel)]="searchTerm" (ngModelChange)="onSearchTermChange()" matTooltip="Search" placeholder="Search" />
+</div>
+<br>
+<div class="panel panel-primary">
+  <div class="panel-body">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Sl No</th>
+          <th>Name</th>
+          <th>Address</th>
+          <th>GST</th>
+          <th>PAN</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let master of masters | async; let i=index">
+          <td>{{ i+1 }}</td>
+          <td>{{ master.name }}</td>
+          <td>{{ master.address }}</td>
+          <td>{{ master.gst }}</td>
+          <td>{{ master.pan }}</td>
+          <td><button (click)="deleteConsigee(''+master.id+'')" class="btn btn-danger">Delete</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+

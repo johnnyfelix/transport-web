@@ -1,0 +1,37 @@
+<div>
+  <button mat-flat-button routerLink="/create-vehicle-master" color="primary">Create Vehicle Master</button>
+</div>
+<br>
+<div>
+<input [(ngModel)]="searchTerm" (ngModelChange)="onSearchTermChange()" matTooltip="Search" placeholder="Search" />
+</div>
+<br>
+<div class="panel panel-primary">
+  <div class="panel-body">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Sl No</th>
+          <th>Number</th>
+          <th>Make</th>
+          <th>Chasis</th>
+          <th>Engine</th>
+          <th>Vehicle Type</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let master of masters | async; let i=index">
+          <td>{{ i+1 }}</td>
+          <td>{{ master.number }}</td>
+          <td>{{ master.make }}</td>
+          <td>{{ master.chasis }}</td>
+          <td>{{ master.engine }}</td>
+          <td>{{ master.vehicleType }}</td>
+          <td><button (click)="deleteVehicle(''+master.id+'')" class="btn btn-danger">Delete</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+

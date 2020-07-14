@@ -1,0 +1,44 @@
+<div style="width: 400px;">
+  <form [formGroup]="form"  (ngSubmit)="onSubmit()">
+    <div class="field">
+      <div class="form-group">
+      <label for="name">Driver Name</label>
+      <input type="text" formControlName="name" class="form-control"  id="name">
+    </div>
+    </div>
+    <div class="field">
+    <div class="form-group">
+      <label for="lcNumber">Licence Number</label>
+      <input type="text" formControlName="lcNumber" class="form-control" id="lcNumber">
+    </div>
+    </div>
+
+    <div class="field">
+      <div class="form-group">
+        <label for="employeeCode">Employee Code</label>
+        <input type="text" formControlName="employeeCode" class="form-control" id="employeeCode">
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="form-group">
+        <label for="aCard">Aadhar Number</label>
+        <input type="text" formControlName="aCard" class="form-control" id="aCard">
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-success">Submit</button>
+    &nbsp;&nbsp;
+    <button type="button" (click)="gotoList()" class="btn btn-danger">Back</button>
+    <br>
+    <br>
+    <div [hidden]="!success">
+      <h5><p class="help is-success">{{ message }}</p></h5>
+    </div>
+    <div [hidden]="!error">
+      <h5><p class="help is-danger">{{ message }}!</p></h5>
+    </div>
+  </form>
+
+</div>
+

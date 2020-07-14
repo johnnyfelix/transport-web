@@ -1,9 +1,12 @@
-import { Movefactory } from '@app/_models';
+import {ConsigneeMaster, Movefactory, VehicleMaster} from '@app/_models';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { MoveFactoryService } from '@app/_services';
+import {AdminMasterService, ConsigneeMasterService, MoveFactoryService, VehicleMasterService} from '@app/_services';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {formatDate} from '@angular/common';
+import {Observable} from 'rxjs';
+import {debounceTime, switchMap} from 'rxjs/operators';
+import {RequireMatch} from '@app/requireMatch';
 
 @Component({
   selector: 'app-create-move-factory',
@@ -18,9 +21,21 @@ export class CreateMoveFactoryComponent implements OnInit {
   myForm: FormGroup;
   control: FormControl;
   message: string;
+  filteredVehicles: Observable<VehicleMaster[]>;
+  filteredConsignee: Observable<VehicleMaster[]>;
+  selecteVehicle:string;
+  selecteConsignee:string;
+  masterMovementType: Observable<string[]>;
+  masterVehicleType: Observable<string[]>;
+  masterPort: Observable<string[]>;
+  masterCFS: Observable<string[]>;
+
 
   constructor(
     private movecfsService: MoveFactoryService,
+    private vehicleService: VehicleMasterService,
+    private adminService: AdminMasterService,
+    private consigneeService: ConsigneeMasterService,
     private fb: FormBuilder,
     private router: Router) { }
 
@@ -28,14 +43,70 @@ export class CreateMoveFactoryComponent implements OnInit {
     this.reactiveForm();
     this.error = false;
     this.success = false;
+    this.filteredVehicles = this.myForm.get('vehicleNumber').valueChanges
+      .pipe(
+        debounceTime(300),
+        switchMap(value => this.vehicleService.searchVehicleMaster(value))
+      );
+    this.filteredConsignee = this.myForm.get('consigneeNameAddress').valueChanges
+      .pipe(
+        debounceTime(300),
+        switchMap(value => this.consigneeService.searchConsigneeMaster(value))
+      );
+
+    this.masterVehicleType = this.myForm.get('vehicleType').valueChanges
+      .pipe(
+        debounceTime(300),
+        switchMap(value => this.adminService.searchVehicleTypes(value))
+      );
+
+    this.masterMovementType = this.myForm.get('movementType').valueChanges
+      .pipe(
+        debounceTime(300),
+        switchMap(value => this.adminService.searchMovementTypes(value))
+      );
+    this.masterPort = this.myForm.get('fromLocation').valueChanges
+      .pipe(
+        debounceTime(300),
+        switchMap(value => this.adminService.searchLocations(value))
+      );
+    this.masterCFS = this.myForm.get('toLocation').valueChanges
+      .pipe(
+        debounceTime(300),
+        switchMap(value => this.adminService.searchLocations(value))
+      );
 
    }
+
+  inputChanged(control: string,event){
+    const selection: any = event.target.value;
+    if (typeof selection === 'string') {
+      this.myForm.controls[control].setErrors({ incorrect: true });
+    }
+    return null;
+  }
+
+  displayFn(vehicleMaster: VehicleMaster) {
+    if (vehicleMaster) { return vehicleMaster.number; }
+  }
+
+  displayWith(consignee: ConsigneeMaster) {
+    if (consignee) { return consignee.name+";"+consignee.address; }
+  }
+
+  vehicleSelected(event) {
+    this.selecteVehicle = event.option.value.number;
+  }
+
+  consigneeSelected(event) {
+    this.selecteConsignee = event.option.value.name+";"+event.option.value.address;
+  }
 
   reactiveForm() {
     this.myForm = this.fb.group({
       transportDate: ['', [Validators.required]],
       movementType: ['', [Validators.required]],
-      vehicleType: [''],
+      vehicleType: ['', [Validators.required]],
       size: [''],
       containerNumber: ['', [Validators.required]],
       fromLocation: ['', [Validators.required]],
@@ -43,22 +114,23 @@ export class CreateMoveFactoryComponent implements OnInit {
       cargoWeight: ['', [Validators.required]],
       blNumber: [''],
       pickupPoint: [''],
-      pickup_date: [''],
-      deliveryDate: [''],
+      pickup_date: ['', [Validators.required]],
+      deliveryDate: ['', [Validators.required]],
       timeIn: [''],
+      timeOut: [''],
       emptyIn: [''],
       boeNo: [''],
-      consigneeNameAddress: ['', [Validators.required]],
+      consigneeNameAddress: ['', [RequireMatch]],
       contractType: [''],
       poShipmentNo: [''],
-      noOfPackages: [''],
+      noOfPackages: ['', [Validators.pattern('^[-]?[0-9]*[.]?[0-9]{0,2}$')]],
       sealNo: [''],
       advance: ['', [Validators.pattern('^[-]?[0-9]*[.]?[0-9]{0,2}$')]],
       diesel: ['', [Validators.pattern('^[-]?[0-9]*[.]?[0-9]{0,2}$')]],
       incentive: ['', [Validators.pattern('^[-]?[0-9]*[.]?[0-9]{0,2}$')]],
       cashSundries: ['', [Validators.pattern('^[-]?[0-9]*[.]?[0-9]{0,2}$')]],
       lrNumber: [''],
-      vehicleNumber: ['', [Validators.required]],
+      vehicleNumber: ['', [RequireMatch]],
       doNumber: [''],
       remark: [''],
       otherExpenses: ['']
@@ -99,6 +171,8 @@ export class CreateMoveFactoryComponent implements OnInit {
       this.error = false;
       this.message = "";
       this.movecfs = this.myForm.value as Movefactory;
+      this.movecfs.vehicleNumber = this.selecteVehicle;
+      this.movecfs.consigneeNameAddress = this.selecteConsignee;
       this.save();
     }
   }

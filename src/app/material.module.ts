@@ -16,6 +16,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { MatToolbarModule,  MatMenuModule, MatDividerModule,
   MatProgressSpinnerModule,  MatCardModule,  MatSlideToggleModule,
   MatOptionModule} from '@angular/material';
@@ -50,6 +51,7 @@ import { MatToolbarModule,  MatMenuModule, MatDividerModule,
    ],
    exports: [
       MatButtonModule,
+     MatAutocompleteModule,
       MatToolbarModule,
       MatIconModule,
       MatSidenavModule,
