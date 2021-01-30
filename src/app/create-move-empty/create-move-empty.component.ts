@@ -1,7 +1,7 @@
-import {Moveempty, VehicleMaster} from '@app/_models';
+import {DriverMaster, Moveempty, VehicleMaster} from '@app/_models';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import {AdminMasterService, MoveEmptyService, VehicleMasterService} from '@app/_services';
+import {AdminMasterService, MoveEmptyService, VehicleMasterService, DriverMasterService} from '@app/_services';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {formatDate} from '@angular/common';
 import {Observable} from 'rxjs';
@@ -23,6 +23,8 @@ export class CreateMoveEmptyComponent implements OnInit {
   message: string;
   selecteVehicle:string;
   filteredmasters: Observable<VehicleMaster[]>;
+  selectedDriver:string;
+  filteredDrivers: Observable<DriverMaster[]>;
   masterMovementType: Observable<string[]>;
   masterPort: Observable<string[]>;
   masterCFS: Observable<string[]>;
@@ -30,6 +32,7 @@ export class CreateMoveEmptyComponent implements OnInit {
   constructor(
     private movecfsService: MoveEmptyService,
     private vehicleService: VehicleMasterService,
+    private driverService: DriverMasterService,
     private adminService: AdminMasterService,
     private fb: FormBuilder,
     private router: Router) { }
@@ -42,6 +45,11 @@ export class CreateMoveEmptyComponent implements OnInit {
       .pipe(
         debounceTime(300),
         switchMap(value => this.vehicleService.searchVehicleMaster(value))
+      );
+    this.filteredDrivers = this.myForm.get('driverName').valueChanges
+      .pipe(
+        debounceTime(300),
+        switchMap(value => this.driverService.searchDriverMaster(value))
       );
     this.masterMovementType = this.myForm.get('movementType').valueChanges
       .pipe(
@@ -78,6 +86,14 @@ export class CreateMoveEmptyComponent implements OnInit {
     if (vehicleMaster) { return vehicleMaster.number; }
   }
 
+  driverSelected(event) {
+    this.selectedDriver = event.option.value.name;
+  }
+  displayDrFn(driverMaster: DriverMaster) {
+    if (driverMaster) { return driverMaster.name; }
+  }
+
+
   reactiveForm() {
     this.myForm = this.fb.group({
       transportDate: ['', [Validators.required]],
@@ -90,9 +106,11 @@ export class CreateMoveEmptyComponent implements OnInit {
       advance: ['', [Validators.pattern('^[-]?[0-9]*[.]?[0-9]{0,2}$')]],
       diesel: ['', [Validators.pattern('^[-]?[0-9]*[.]?[0-9]{0,2}$')]],
       incentive: ['', [Validators.pattern('^[-]?[0-9]*[.]?[0-9]{0,2}$')]],
-      cashSundries: ['', [Validators.pattern('^[-]?[0-9]*[.]?[0-9]{0,2}$')]],
+      cashSundaries: ['', [Validators.pattern('^[-]?[0-9]*[.]?[0-9]{0,2}$')]],
+      rate: ['', [Validators.required, Validators.pattern('^[-]?[0-9]*[.]?[0-9]{0,2}$')]],
       lrNumber: [''],
       vehicleNumber: ['', [RequireMatch]],
+      driverName: ['', [RequireMatch]],
       doNumber: [''],
       doType: [''],
       offloadReceipt: ['']
@@ -118,6 +136,7 @@ export class CreateMoveEmptyComponent implements OnInit {
       this.message = "";
       this.movecfs = this.myForm.value as Moveempty;
       this.movecfs.vehicleNumber = this.selecteVehicle;
+      this.movecfs.driverName = this.selectedDriver;
       this.save();
     }
   }

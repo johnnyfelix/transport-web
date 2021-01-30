@@ -25,7 +25,7 @@ export class ViewMoveCfsComponent implements OnInit {
 
   displayedColumns: string[] = ['serial', 'movementPtcId', 'transportDate', 'movementType', 'size', 'containerNumber',
   'fromLocation', 'toLocation', 'via', 'advance', 'diesel', 'incentive', 'cashSundaries',
-    'lrNumber', 'vehicleNumber', 'doNumber', 'weight'];
+    'lrNumber', 'vehicleNumber', 'driverName', 'doNumber', 'weight', 'rate'];
 
 
   options = {
@@ -37,7 +37,7 @@ export class ViewMoveCfsComponent implements OnInit {
     useBom: true,
     headers: ['SL No', 'Transport Date', 'Movement Type', 'Size', 'Container Number',
       'From Location', 'To Location', 'Via', 'Advance', 'Diesel', 'Incentive', 'Cash Sundaries',
-      'LR Number', 'Vehicle Number', 'Do Number', 'Weight']
+      'LR Number', 'Vehicle Number', 'Driver Name', 'Do Number', 'Weight', 'Rate']
   };
 
   constructor(private movecfsService: MovecfsService,
@@ -95,6 +95,16 @@ export class ViewMoveCfsComponent implements OnInit {
     var movecfsArray: Array<Movecfs> =[];
     for (var movecfs of this.movecfsList) {
       movecfs.movementPtcId = i++;
+      if(movecfs.rate == null)
+        movecfs.rate = 0;
+      if(movecfs.advance == null)
+        movecfs.advance = 0;
+      if(movecfs.diesel == null)
+        movecfs.diesel = 0;
+      if(movecfs.cashSundaries == null)
+        movecfs.cashSundaries = 0;
+      if(movecfs.incentive == null)
+        movecfs.incentive = 0;
       movecfsArray.push(movecfs);
     }
     return movecfsArray;

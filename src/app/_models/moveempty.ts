@@ -16,4 +16,6 @@
   doNumber: string;
   doType: string;
   offloadReceipt: string;
+  driverName: string;
+  rate: number;
 }

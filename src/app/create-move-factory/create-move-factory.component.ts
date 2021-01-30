@@ -1,7 +1,7 @@
-import {ConsigneeMaster, Movefactory, VehicleMaster} from '@app/_models';
+import {ConsigneeMaster, DriverMaster, Movefactory, VehicleMaster} from '@app/_models';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import {AdminMasterService, ConsigneeMasterService, MoveFactoryService, VehicleMasterService} from '@app/_services';
+import {AdminMasterService, ConsigneeMasterService, MoveFactoryService, VehicleMasterService, DriverMasterService} from '@app/_services';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {formatDate} from '@angular/common';
 import {Observable} from 'rxjs';
@@ -22,8 +22,10 @@ export class CreateMoveFactoryComponent implements OnInit {
   control: FormControl;
   message: string;
   filteredVehicles: Observable<VehicleMaster[]>;
-  filteredConsignee: Observable<VehicleMaster[]>;
+  filteredConsignee: Observable<ConsigneeMaster[]>;
   selecteVehicle:string;
+  selectedDriver:string;
+  filteredDrivers: Observable<DriverMaster[]>;
   selecteConsignee:string;
   masterMovementType: Observable<string[]>;
   masterVehicleType: Observable<string[]>;
@@ -34,6 +36,7 @@ export class CreateMoveFactoryComponent implements OnInit {
   constructor(
     private movecfsService: MoveFactoryService,
     private vehicleService: VehicleMasterService,
+    private driverService: DriverMasterService,
     private adminService: AdminMasterService,
     private consigneeService: ConsigneeMasterService,
     private fb: FormBuilder,
@@ -47,6 +50,11 @@ export class CreateMoveFactoryComponent implements OnInit {
       .pipe(
         debounceTime(300),
         switchMap(value => this.vehicleService.searchVehicleMaster(value))
+      );
+    this.filteredDrivers = this.myForm.get('driverName').valueChanges
+      .pipe(
+        debounceTime(300),
+        switchMap(value => this.driverService.searchDriverMaster(value))
       );
     this.filteredConsignee = this.myForm.get('consigneeNameAddress').valueChanges
       .pipe(
@@ -94,6 +102,13 @@ export class CreateMoveFactoryComponent implements OnInit {
     if (consignee) { return consignee.name+";"+consignee.address; }
   }
 
+  driverSelected(event) {
+    this.selectedDriver = event.option.value.name;
+  }
+  displayDrFn(driverMaster: DriverMaster) {
+    if (driverMaster) { return driverMaster.name; }
+  }
+
   vehicleSelected(event) {
     this.selecteVehicle = event.option.value.number;
   }
@@ -128,9 +143,11 @@ export class CreateMoveFactoryComponent implements OnInit {
       advance: ['', [Validators.pattern('^[-]?[0-9]*[.]?[0-9]{0,2}$')]],
       diesel: ['', [Validators.pattern('^[-]?[0-9]*[.]?[0-9]{0,2}$')]],
       incentive: ['', [Validators.pattern('^[-]?[0-9]*[.]?[0-9]{0,2}$')]],
-      cashSundries: ['', [Validators.pattern('^[-]?[0-9]*[.]?[0-9]{0,2}$')]],
+      cashSundaries: ['', [Validators.pattern('^[-]?[0-9]*[.]?[0-9]{0,2}$')]],
+      rate: ['', [Validators.required, Validators.pattern('^[-]?[0-9]*[.]?[0-9]{0,2}$')]],
       lrNumber: [''],
       vehicleNumber: ['', [RequireMatch]],
+      driverName: ['', [RequireMatch]],
       doNumber: [''],
       remark: [''],
       otherExpenses: ['']
@@ -173,6 +190,7 @@ export class CreateMoveFactoryComponent implements OnInit {
       this.movecfs = this.myForm.value as Movefactory;
       this.movecfs.vehicleNumber = this.selecteVehicle;
       this.movecfs.consigneeNameAddress = this.selecteConsignee;
+      this.movecfs.driverName = this.selectedDriver;
       this.save();
     }
   }

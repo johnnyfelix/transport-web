@@ -29,6 +29,11 @@ export class DriverMasterService {
   }
 
   searchDriverMaster(value: any): Observable<any>{
-    return this.http.get(`${this.baseUrl}?query=${value}`);
+    if(typeof value === 'string'){
+      return this.http.get(`${this.baseUrl}?query=${value}`);
+    }else{
+      return this.http.get(`${this.baseUrl}`);
+    }
+
   }
 }

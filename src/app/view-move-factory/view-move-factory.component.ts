@@ -22,10 +22,11 @@ export class ViewMoveFactoryComponent implements OnInit {
   @ViewChild(MatPaginator,{static: false}  ) paginator;
   @ViewChild(MatSort,{static: false}) sort;
 
-  displayedColumns: string[] = ['serial', 'movementPtfId', 'transportDate', 'movementType', 'size', 'containerNumber',
-  'fromLocation', 'toLocation', 'cargoWeight','pickupPoint','pickup_date',
-    'deliveryDate','timeIn', 'timeOut', 'emptyIn','diesel','lrNumber',
-    'vehicleNumber', 'doNumber'];
+  displayedColumns: string[] = ['serial', 'movementPtfId', 'transportDate', 'movementType', 'vehicleType', 'size', 'containerNumber',
+  'fromLocation', 'toLocation', 'cargoWeight','blNumber', 'pickupPoint','pickup_date',
+    'deliveryDate','timeIn', 'timeOut', 'emptyIn', 'boeNo', 'consigneeNameAddress', 'contractType', 'poShipmentNo',
+  'noOfPackages','sealNo', 'advance','diesel','incentive','cashSundaries','lrNumber','vehicleNumber','driverName',
+  'doNumber','remark','otherExpenses',  'rate'];
 
 
   options = {
@@ -35,10 +36,10 @@ export class ViewMoveFactoryComponent implements OnInit {
     showLabels: true,
     showTitle: false,
     useBom: true,
-    headers: ['SL NO','Transport Date','Movement Type','Vehicle Type','Size','Container Number','From Location',
+    headers: ['SL NO','Transport Date','Movement Type', 'Vehicle Type', 'Size','Container Number','From Location',
       'To Location','Cargo Weight','BL Number','Pickup Point','Pickup Date','Delivery Date','Time In','Time Out',
-      'Empty In','BOE No','Consignee Name Address','Contract Type','Po Shipment No','No Of Packages','Seal No','Advance',
-      'Diesel','Incentive','Cash Sundaries','LR Number','Vehicle Number','DO Number','Remark','Other Expenses']
+      'Empty In','BOE No','Consignee Name Address','Contract Type','Po Shipment No','No Of Packages','Seal No', 'Advance',
+      'Diesel','Incentive', 'Cash Sundries','LR Number','Vehicle Number','DO Number', 'Remark', 'Other Expenses', 'Driver Name', 'Rate']
   };
 
   constructor(private moveFactoryService: MoveFactoryService,
@@ -112,6 +113,20 @@ export class ViewMoveFactoryComponent implements OnInit {
     var movecfsArray: Array<Movefactory> =[];
     for (var movecfs of this.movecfsList) {
       movecfs.movementPtfId = i++;
+      if(movecfs.rate == null)
+        movecfs.rate = 0;
+      if(movecfs.advance == null)
+        movecfs.advance = 0;
+      if(movecfs.diesel == null)
+        movecfs.diesel = 0;
+      if(movecfs.cashSundaries == null)
+        movecfs.cashSundaries = 0;
+      if(movecfs.incentive == null)
+        movecfs.incentive = 0;
+      if(movecfs.otherExpenses == null)
+        movecfs.otherExpenses = "";
+      if(movecfs.driverName == null)
+        movecfs.driverName = "";
       movecfsArray.push(movecfs);
     }
     return movecfsArray;

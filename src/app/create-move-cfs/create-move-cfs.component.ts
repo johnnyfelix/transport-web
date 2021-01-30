@@ -1,7 +1,7 @@
-import {Movecfs, VehicleMaster} from '@app/_models';
+import {DriverMaster, Movecfs, VehicleMaster} from '@app/_models';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import {AdminMasterService, MovecfsService, VehicleMasterService} from '@app/_services';
+import {AdminMasterService, MovecfsService, VehicleMasterService, DriverMasterService} from '@app/_services';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {formatDate} from '@angular/common';
 import {Observable} from 'rxjs';
@@ -22,7 +22,9 @@ export class CreateMoveCfsComponent implements OnInit {
   myForm: FormGroup;
   control = new FormControl();
   selectedVehicle:string;
+  selectedDriver:string;
   filteredVehicles: Observable<VehicleMaster[]>;
+  filteredDrivers: Observable<DriverMaster[]>;
   masterMovementType: Observable<string[]>;
   masterPort: Observable<string[]>;
   masterCFS: Observable<string[]>;
@@ -32,6 +34,7 @@ export class CreateMoveCfsComponent implements OnInit {
     private movecfsService: MovecfsService,
     private vehicleService: VehicleMasterService,
     private adminService: AdminMasterService,
+    private driverService: DriverMasterService,
     private fb: FormBuilder,
     private router: Router) { }
 
@@ -44,6 +47,11 @@ export class CreateMoveCfsComponent implements OnInit {
       .pipe(
         debounceTime(300),
         switchMap(value => this.vehicleService.searchVehicleMaster(value))
+      );
+    this.filteredDrivers = this.myForm.get('driverName').valueChanges
+      .pipe(
+        debounceTime(300),
+        switchMap(value => this.driverService.searchDriverMaster(value))
       );
     this.masterMovementType = this.myForm.get('movementType').valueChanges
       .pipe(
@@ -75,8 +83,16 @@ export class CreateMoveCfsComponent implements OnInit {
     this.selectedVehicle = event.option.value.number;
   }
 
+  driverSelected(event) {
+    this.selectedDriver = event.option.value.name;
+  }
+
   displayFn(vehicleMaster: VehicleMaster) {
     if (vehicleMaster) { return vehicleMaster.number; }
+  }
+
+  displayDrFn(driverMaster: DriverMaster) {
+    if (driverMaster) { return driverMaster.name; }
   }
 
   reactiveForm() {
@@ -91,10 +107,12 @@ export class CreateMoveCfsComponent implements OnInit {
       advance: ['', [Validators.pattern('^[-]?[0-9]*[.]?[0-9]{0,2}$')]],
       diesel: ['', [Validators.pattern('^[-]?[0-9]*[.]?[0-9]{0,2}$')]],
       incentive: ['', [Validators.pattern('^[-]?[0-9]*[.]?[0-9]{0,2}$')]],
-      cashSundries: ['', [Validators.pattern('^[-]?[0-9]*[.]?[0-9]{0,2}$')]],
+      cashSundaries: ['', [Validators.pattern('^[-]?[0-9]*[.]?[0-9]{0,2}$')]],
+      rate: ['', [Validators.required, Validators.pattern('^[-]?[0-9]*[.]?[0-9]{0,2}$')]],
       weight: [''],
       lrNumber: ['', [Validators.required]],
       vehicleNumber: ['', [RequireMatch]],
+      driverName: ['', [RequireMatch]],
       doNumber: ['', [Validators.required]],
     })
   }
@@ -118,6 +136,7 @@ export class CreateMoveCfsComponent implements OnInit {
       this.message = "";
       this.movecfs = this.myForm.value as Movecfs;
       this.movecfs.vehicleNumber = this.selectedVehicle;
+      this.movecfs.driverName = this.selectedDriver;
       this.save();
     }
   }

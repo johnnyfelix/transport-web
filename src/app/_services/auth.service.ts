@@ -20,7 +20,7 @@ export class AuthService {
 
   setUserDetails(){
     this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
-    console.log("tr_token from local store "+localStorage.getItem('tr_token'))
+    //console.log("tr_token from local store "+localStorage.getItem('tr_token'))
     this.token = localStorage.getItem('tr_token');
     this.currentUser = this.currentUserSubject.asObservable();
   }

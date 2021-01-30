@@ -85,8 +85,8 @@ import {AdminMasterComponent} from '@app/admin-master/admin-master.component';
   providers: [
     Title,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    {provide: MAT_DATE_LOCALE, useValue: 'en-GB'}
-   // { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+    {provide: MAT_DATE_LOCALE, useValue: 'en-GB'},
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
     ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

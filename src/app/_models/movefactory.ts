@@ -27,6 +27,8 @@
   cashSundaries: number;
   lrNumber: string;
   vehicleNumber: string;
+  driverName: string;
+  rate: number;
   doNumber: string;
   remark: string;
   otherExpenses: string;

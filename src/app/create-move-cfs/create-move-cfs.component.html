@@ -65,6 +65,13 @@
       </mat-form-field>
 
       <mat-form-field class="example-full-width">
+        <input matInput placeholder="Rate" formControlName="rate">
+        <mat-error *ngIf="errorHandling('rate', 'pattern')">
+          You must provide valid number for <strong>Rate</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
         <input matInput placeholder="Advance" formControlName="advance">
         <mat-error *ngIf="errorHandling('advance', 'pattern')">
           You must provide valid number for <strong>Advance</strong>
@@ -86,8 +93,8 @@
       </mat-form-field>
 
       <mat-form-field class="example-full-width">
-        <input matInput placeholder="Cash Sundries" formControlName="cashSundries">
-        <mat-error *ngIf="errorHandling('cashSundries', 'pattern')">
+        <input matInput placeholder="Cash Sundries" formControlName="cashSundaries">
+        <mat-error *ngIf="errorHandling('cashSundaries', 'pattern')">
           You must provide valid number for <strong>Incentive</strong>
         </mat-error>
       </mat-form-field>
@@ -111,6 +118,18 @@
 
       <mat-form-field class="example-full-width">
         <input matInput placeholder="LR Number" formControlName="lrNumber">
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+         <input matInput placeholder="Driver Name" matTooltip="Type to Search" formControlName="driverName" [matAutocomplete]="driver">
+        <mat-autocomplete #driver="matAutocomplete"  [displayWith]="displayDrFn" (optionSelected)="driverSelected($event)">
+          <mat-option *ngFor="let option of filteredDrivers | async" [value]="option">
+            {{option.name}}
+          </mat-option>
+        </mat-autocomplete>
+        <mat-error *ngIf="errorHandling('driverName', 'incorrect')">
+          Please select a Driver Name from List
+        </mat-error>
       </mat-form-field>
 
       <mat-form-field class="example-full-width">
