@@ -151,7 +151,7 @@ export class CreateMoveCfsComponent implements OnInit {
       },
       error => {
         console.log(error);
-        this.message = error.error.message;
+        this.message = error;
         this.error = true;
       });
   }

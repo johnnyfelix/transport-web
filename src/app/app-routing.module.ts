@@ -24,155 +24,175 @@ import {DriverMasterComponent} from '@app/driver-master/driver-master.component'
 import {FactoryMasterComponent} from '@app/factory-master/factory-master.component';
 import {CreateFactoryMasterComponent} from '@app/create-factory-master/create-factory-master.component';
 import {AdminMasterComponent} from '@app/admin-master/admin-master.component';
+import {ViewMoveAllComponent} from '@app/view-move-all/view-move-all.component';
+import {CreateCashVoucherComponent} from '@app/create-cash-voucher/create-cash-voucher.component';
+import {ViewCashVouchersComponent} from '@app/view-cash-vouchers/view-cash-vouchers.component';
+import {ViewCashVoucherComponent} from '@app/view-cash-voucher/view-cash-voucher.component';
+import {PrintLayoutComponent} from '@app/print-layout/print-layout.component';
+import {PrintCashVoucherComponent} from '@app/print-cash-voucher/print-cash-voucher.component';
+import {HomeLayoutComponent} from '@app/home-layout/home-layout.component';
 
 const routes: Routes = [
   {
+  path: 'login',
+  data: {title: 'Grace Transport Solutions'},
+  component: LoginComponent
+  },
+  {
     path: '',
-    component: HomeComponent,
-    data: {title: 'Grace Transport Solutions'},
+    data: {title: 'App Home'},
+    component: HomeLayoutComponent,
+    children: [
+      { path: 'home',
+        component: HomeComponent,
+        data: {title: 'Grace Transport Solutions'}
+      },
+      { path: '',
+        component: HomeComponent,
+        data: {title: 'Grace Transport Solutions'}
+      },
+      {
+        path: 'companies',
+        component: CompaniesComponent,
+        data: {title: 'Company List'}
+      },
+      {
+        path: 'create-company',
+        data: {title: 'Create Company'},
+        component: CreateCompanyComponent
+      } ,
+      {
+        path: 'edit-company/:id',
+        data: {title: 'Edit Company'},
+        component: EditCompanyComponent
+      },
+      {
+        path: 'users',
+        component: UsersComponent,
+        data: {title: 'User List'}
+      },
+      {
+        path: 'create-user',
+        data: {title: 'Create User'},
+        component: CreateUserComponent
+      },
+      {
+        path: 'view-move-cfs',
+        data: {title: 'Report - Movement (Port to CFS)'},
+        component: ViewMoveCfsComponent
+      },
+      {
+        path: 'reset-password/:username',
+        data: {title: 'Reset Password'},
+        component: ResetPasswordComponent
+      },
+      {
+        path: 'create-move-cfs',
+        data: {title: 'Movement (Port to CFS)'},
+        component: CreateMoveCfsComponent
+      },
+      {
+        path: 'create-move-factory',
+        data: {title: 'Movement (Port/CFS to Factory)'},
+        component: CreateMoveFactoryComponent,
+      },
+      {
+        path: 'create-move-empty',
+        data: {title: 'Movement (Empty)'},
+        component: CreateMoveEmptyComponent
+      },
+      {
+        path: 'view-move-all',
+        data: {title: 'Report - All Movements'},
+        component: ViewMoveAllComponent
+      },
+      {
+        path: 'view-move-factory',
+        data: {title: 'Report - Movement (Port/CFS to Factory)'},
+        component: ViewMoveFactoryComponent
+      },
+      {
+        path: 'view-move-empty',
+        data: {title: 'Report - Movement (Empty)'},
+        component: ViewMoveEmptyComponent
+      },
+      {
+        path: 'vehicle-master',
+        data: {title: 'Vehicle Master'},
+        component: VehicleMasterComponent
+      },
+      {
+        path: 'consignee-master',
+        data: {title: 'consignee Master'},
+        component: ConsigneeMasterComponent
+      },
+      {
+        path: 'create-vehicle-master',
+        data: {title: 'Create Vehicle Master'},
+        component: CreateVehicleMasterComponent
+      },
+      {
+        path: 'create-consignee-master',
+        data: {title: 'Create Consignee Master'},
+        component: CreateConsigneeMasterComponent
+      },
+      {
+        path: 'create-driver-master',
+        data: {title: 'Create Driver Master'},
+        component: CreateDriverMasterComponent
+      },
+      {
+        path: 'driver-master',
+        data: {title: 'Driver Master'},
+        component: DriverMasterComponent
+      },
+      {
+        path: 'factory-master',
+        data: {title: 'Factory Master'},
+        component: FactoryMasterComponent
+      },
+      {
+        path: 'admin-master',
+        data: {title: 'Admin Master'},
+        component: AdminMasterComponent
+      },
+      {
+        path: 'create-factory-master',
+        data: {title: 'Create Factory Master'},
+        component: CreateFactoryMasterComponent
+      },
+      {
+        path: 'create-cash-voucher',
+        data: {title: 'Create Cash Voucher'},
+        component: CreateCashVoucherComponent
+      },
+      {
+        path: 'view-cash-vouchers',
+        data: {title: 'View Cash Vouchers'},
+        component: ViewCashVouchersComponent
+      },
+      {
+        path: 'view-cash-voucher/:id',
+        data: {title: 'View Cash Voucher'},
+        component: ViewCashVoucherComponent,
+        canActivate: [ AuthGuardService ]
+      }
+    ],
     canActivate: [ AuthGuardService ]
   },
   {
-    path: 'home',
-    component: HomeComponent,
-    data: {title: 'Grace Transport Solutions'},
+    path: 'print-cash-voucher/:id',
+    data: {title: 'Print Cash Voucher'},
+    component: PrintCashVoucherComponent,
     canActivate: [ AuthGuardService ]
   },
   {
-    path: 'login',
-    data: {title: 'Grace Transport Solutions'},
-    component: LoginComponent
-  },
-  {
-    path: 'companies',
-    component: CompaniesComponent,
-    data: {title: 'Company List'},
-    canActivate: [ AuthGuardService ]
-  },
-  {
-    path: 'create-company',
-    data: {title: 'Create Company'},
-    component: CreateCompanyComponent,
-    canActivate: [ AuthGuardService ]
-  },
-  {
-    path: 'edit-company/:id',
-    data: {title: 'Edit Company'},
-    component: EditCompanyComponent,
-    canActivate: [ AuthGuardService ]
-  },
-  {
-    path: 'companies',
-    component: CompaniesComponent,
-    data: {title: 'Company List'},
-    canActivate: [ AuthGuardService ]
-  },
-  {
-    path: 'users',
-    component: UsersComponent,
-    data: {title: 'User List'},
-    canActivate: [ AuthGuardService ]
-  },
-  {
-    path: 'create-user',
-    data: {title: 'Create User'},
-    component: CreateUserComponent,
-    canActivate: [ AuthGuardService ]
-  },
-  {
-    path: 'reset-password/:username',
-    data: {title: 'Reset Password'},
-    component: ResetPasswordComponent,
-    canActivate: [ AuthGuardService ]
-  },
-  {
-    path: 'create-move-cfs',
-    data: {title: 'Movement (Port to CFS)'},
-    component: CreateMoveCfsComponent,
-    canActivate: [ AuthGuardService ]
-  },
-  {
-    path: 'create-move-factory',
-    data: {title: 'Movement (Port/CFS to Factory)'},
-    component: CreateMoveFactoryComponent,
-    canActivate: [ AuthGuardService ]
-  },
-  {
-    path: 'create-move-empty',
-    data: {title: 'Movement (Empty)'},
-    component: CreateMoveEmptyComponent,
-    canActivate: [ AuthGuardService ]
-  },
-  {
-    path: 'view-move-cfs',
-    data: {title: 'Report - Movement (Port to CFS)'},
-    component: ViewMoveCfsComponent,
-    canActivate: [ AuthGuardService ]
-  },
-  {
-    path: 'view-move-factory',
-    data: {title: 'Report - Movement (Port/CFS to Factory)'},
-    component: ViewMoveFactoryComponent,
-    canActivate: [ AuthGuardService ]
-  },
-  {
-    path: 'view-move-empty',
-    data: {title: 'Report - Movement (Empty)'},
-    component: ViewMoveEmptyComponent,
-    canActivate: [ AuthGuardService ]
-  },
-  {
-    path: 'vehicle-master',
-    data: {title: 'Vehicle Master'},
-    component: VehicleMasterComponent,
-    canActivate: [ AuthGuardService ]
-  },
-  {
-    path: 'consignee-master',
-    data: {title: 'consignee Master'},
-    component: ConsigneeMasterComponent,
-    canActivate: [ AuthGuardService ]
-  },
-  {
-    path: 'create-vehicle-master',
-    data: {title: 'Create Vehicle Master'},
-    component: CreateVehicleMasterComponent,
-    canActivate: [ AuthGuardService ]
-  },
-  {
-    path: 'create-consignee-master',
-    data: {title: 'Create Consignee Master'},
-    component: CreateConsigneeMasterComponent,
-    canActivate: [ AuthGuardService ]
-  },
-  {
-    path: 'create-driver-master',
-    data: {title: 'Create Driver Master'},
-    component: CreateDriverMasterComponent,
-    canActivate: [ AuthGuardService ]
-  },
-  {
-    path: 'driver-master',
-    data: {title: 'Driver Master'},
-    component: DriverMasterComponent,
-    canActivate: [ AuthGuardService ]
-  },
-  {
-    path: 'factory-master',
-    data: {title: 'Factory Master'},
-    component: FactoryMasterComponent,
-    canActivate: [ AuthGuardService ]
-  },
-  {
-    path: 'admin-master',
-    data: {title: 'Admin Master'},
-    component: AdminMasterComponent,
-    canActivate: [ AuthGuardService ]
-  },
-  {
-    path: 'create-factory-master',
-    data: {title: 'Create Factory Master'},
-    component: CreateFactoryMasterComponent,
+    path: 'print-document',
+    data: {title: 'Print Document'},
+    component: PrintLayoutComponent,
+    children: [
+      { path: 'print-cash-voucher/:id', component: PrintCashVoucherComponent }
+    ],
     canActivate: [ AuthGuardService ]
   }
 ];

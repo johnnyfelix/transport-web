@@ -1,0 +1,80 @@
+<!-- wrapper -->
+<mat-toolbar color="warn">
+  <mat-toolbar-row>
+    <h3>View Cash Voucher</h3>
+  </mat-toolbar-row>
+</mat-toolbar>
+<div class="wrapper">
+  <br>
+  <div>
+    &nbsp;
+    <span><button mat-flat-button routerLink="/view-cash-vouchers" class="btn btn-primary">View Vouchers</button></span>
+    &nbsp;
+  </div>
+  </div>
+
+<mat-sidenav-container>
+  <mat-sidenav-content>
+
+    <form [formGroup]="myForm" novalidate>
+      <table>
+        <tr>
+          <td><mat-card>Voucher Date </mat-card> </td>
+          <td> <mat-card> <b>{{ cashVoucher.voucherDate }} </b></mat-card></td>
+        </tr>
+        <tr>
+          <td><mat-card>Payee  </mat-card> </td>
+          <td> <mat-card> <b>{{ cashVoucher.paid }} </b></mat-card></td>
+        </tr>
+        <tr>
+          <td><mat-card>Payer  </mat-card> </td>
+          <td> <mat-card> <b>{{ cashVoucher.paidTo }} </b></mat-card></td>
+        </tr>
+        <tr>
+          <td><mat-card>Amount  </mat-card> </td>
+          <td> <mat-card> <b>{{ cashVoucher.amount }} </b></mat-card></td>
+        </tr>
+        <tr>
+          <td><mat-card>Voucher No   </mat-card> </td>
+          <td> <mat-card> <b>{{ cashVoucher.voucherNo }} </b></mat-card></td>
+        </tr>
+        <tr>
+          <td><mat-card>Approved By  </mat-card> </td>
+          <td> <mat-card> <b>{{ cashVoucher.approvedBy }} </b></mat-card></td>
+        </tr>
+        <tr>
+          <td><mat-card>Balance Received  </mat-card> </td>
+          <td> <mat-card> <b>{{ cashVoucher.balanceReceived }} </b></mat-card></td>
+        </tr>
+      </table>
+
+      <table>
+        <tr>
+          <td> <div [hidden]="!approved"> <mat-card> <div class="button-wrapper">
+            <button mat-flat-button (click)="printVoucher(cashVoucher)" color="primary">Print</button>
+          </div> </mat-card> </div></td>
+          <td> <div [hidden]="approved"><mat-card> <div class="button-wrapper">
+            <button mat-flat-button (click)="openDialog('Delete', cashVoucher)" color="primary">Delete</button>
+          </div></mat-card></div></td>
+          <td> <div [hidden]="approved"> <mat-card> <div class="button-wrapper">
+            <button mat-flat-button (click)="approveVoucher(cashVoucher)" color="primary">Approve</button>
+          </div> </mat-card> </div></td>
+        </tr>
+      </table>
+
+
+
+
+      <br><br>
+
+      <div [hidden]="!error">
+        <h5><p class="help is-danger">{{ message }}</p></h5>
+      </div>
+
+      <div [hidden]="!success">
+        <h5><p class="help is-success">{{ message }}</p></h5>
+      </div>
+    </form>
+
+  </mat-sidenav-content>
+</mat-sidenav-container>

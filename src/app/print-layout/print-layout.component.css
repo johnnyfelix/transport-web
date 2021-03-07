@@ -1,0 +1,13 @@
+.header, .header-space
+ { height: 100px; }
+.header {
+          position: fixed;
+          top: 0;
+          align-content: center;
+         }
+
+@media screen {
+  :host {
+    display: none;
+  }
+}

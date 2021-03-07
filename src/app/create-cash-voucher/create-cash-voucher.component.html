@@ -1,0 +1,66 @@
+<!-- wrapper -->
+<mat-toolbar color="warn">
+  <mat-toolbar-row>
+    <h3>Create Cash Voucher</h3>
+  </mat-toolbar-row>
+</mat-toolbar>
+<div class="wrapper">
+  <br>
+  <div>
+    &nbsp;
+    <span><button mat-flat-button routerLink="/view-cash-vouchers" class="btn btn-primary">View Vouchers</button></span>
+    &nbsp;
+  </div>
+  <div>
+<mat-sidenav-container>
+  <mat-sidenav-content>
+    <form [formGroup]="myForm" (ngSubmit)="submitForm()" novalidate>
+
+      <!-- Date picker -->
+      <mat-form-field>
+        <input matInput readonly [matDatepicker]="picker" placeholder="Voucher Date" formControlName="voucherDate"
+               (dateChange)="date($event)">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Paid By" formControlName="paid">
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Paid To" formControlName="paidTo">
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Voucher Number" formControlName="voucherNo">
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Amount" formControlName="amount">
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Balance Received" formControlName="balanceReceived">
+      </mat-form-field>
+
+      <!-- Submit -->
+      <div class="button-wrapper">
+        <button mat-flat-button color="primary">Submit</button>
+      </div>
+      <br><br>
+
+      <div [hidden]="!error">
+        <h5><p class="help is-danger">{{ message }}</p></h5>
+      </div>
+
+      <div [hidden]="!success">
+        <h5><p class="help is-success">{{ message }}</p></h5>
+      </div>
+    </form>
+
+
+  </mat-sidenav-content>
+</mat-sidenav-container>
+  </div>
+</div>

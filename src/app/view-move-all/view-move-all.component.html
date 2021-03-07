@@ -3,9 +3,9 @@
   <div>
     <span><button mat-flat-button routerLink="/view-move-cfs" class="btn btn-primary">Movement Port to CFS</button></span>
     &nbsp;&nbsp;
+    <span><button mat-flat-button routerLink="/view-move-factory" class="btn btn-primary">Movement Port/CFS to Factory</button></span>
+    &nbsp;&nbsp;
     <span><button mat-flat-button routerLink="/view-move-empty" class="btn btn-primary">Movement Empty</button></span>
-    &nbsp;
-    <span><button mat-flat-button routerLink="/view-move-all" class="btn btn-primary">All Movement</button></span>
   </div>
   <div>
     <form [formGroup]="myForm" novalidate>
@@ -34,9 +34,14 @@
       </td>
     </ng-container>
 
-    <ng-container matColumnDef="movementPtfId">
+    <ng-container matColumnDef="movementId">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
-      <td mat-cell *matCellDef="let movecfs"> {{movecfs.movementPtfId}} </td>
+      <td mat-cell *matCellDef="let movecfs"> {{movecfs.movementId}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="category">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Category </th>
+      <td mat-cell *matCellDef="let movecfs"> {{movecfs.category}} </td>
     </ng-container>
 
     <ng-container matColumnDef="transportDate">
@@ -69,6 +74,11 @@
       <td mat-cell *matCellDef="let movecfs"> {{movecfs.fromLocation}} </td>
     </ng-container>
 
+    <ng-container matColumnDef="via">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Via </th>
+      <td mat-cell *matCellDef="let movecfs"> {{movecfs.via}} </td>
+    </ng-container>
+
     <ng-container matColumnDef="toLocation">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> To Location </th>
       <td mat-cell *matCellDef="let movecfs"> {{movecfs.toLocation}} </td>
@@ -82,6 +92,11 @@
     <ng-container matColumnDef="blNumber">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> BL Number </th>
       <td mat-cell *matCellDef="let movecfs"> {{movecfs.blNumber}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="weight">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Weight </th>
+      <td mat-cell *matCellDef="let movecfs"> {{movecfs.weight}} </td>
     </ng-container>
 
     <ng-container matColumnDef="pickupPoint">
@@ -197,6 +212,16 @@
     <ng-container matColumnDef="otherExpenses">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Other Expenses </th>
       <td mat-cell *matCellDef="let movecfs"> {{movecfs.otherExpenses}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="doType">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> DO Type </th>
+      <td mat-cell *matCellDef="let movecfs"> {{movecfs.doType}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="offloadReceipt">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Offload Receipt </th>
+      <td mat-cell *matCellDef="let movecfs"> {{movecfs.offloadReceipt}} </td>
     </ng-container>
 
     <!--<ng-container matColumnDef="action">

@@ -1,0 +1,39 @@
+<div>
+  <h2>Cash Voucher</h2>
+  <table>
+    <thead><tr><td class="left-cell">
+      <h2>Voucher Number : {{ cashVoucher.voucherNo }}</h2>
+    </td>
+      <td class="right-cell">
+
+      </td>
+    </tr><tr><td class="left-cell">
+      <h2>Date : {{ displayDate(cashVoucher.voucherDate) }}</h2>
+    </td>
+      <td class="right-cell">
+
+      </td>
+    </tr></thead>
+    <tbody>
+    <tr><td class="cell"><span> <h2>Payee</h2> </span></td><td class="cell"><h2> {{ cashVoucher.paidTo }} </h2></tr>
+    <tr><td class="cell"><span> <h2>Payer</h2> </span></td><td class="cell"><h2> {{ cashVoucher.paid }}</h2></tr>
+    <tr><td class="cell"><span> <h2>Amount</h2> </span></td><td class="cell"><h2> {{ cashVoucher.amount}} </h2></tr>
+    <tr><td class="cell"><span> <h2>Approved By</h2> </span></td><td class="cell"><h2> {{ cashVoucher.approvedBy }} </h2></tr>
+    <tr><td class="cell"><span> <h2>Balance Received</h2> </span></td><td class="cell"><h2> {{ cashVoucher.balanceReceived }}</h2></tr>
+    <tr><td class="left-cell">
+      <h2>Receiver Signature  </h2>
+    </td>
+      <td class="bottom-top-right-cell">
+        <h2>Payer Signature  </h2>
+      </td>
+    </tr><tr><td class="bottom-left-cell">
+      <h2> &nbsp; </h2>
+    </td>
+      <td class="bottom-right-cell">
+        <h2>&nbsp; </h2>
+      </td>
+    </tr>
+    </tbody>
+    <tfoot></tfoot>
+  </table>
+</div>

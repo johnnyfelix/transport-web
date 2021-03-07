@@ -52,7 +52,7 @@ export class CreateDriverMasterComponent implements OnInit {
         error => {
           this.error = true;
           this.success = false;
-          this.message = error.error.message;
+          this.message = error;
           this.error = true;
         });
     this.driverMaster = new DriverMaster();

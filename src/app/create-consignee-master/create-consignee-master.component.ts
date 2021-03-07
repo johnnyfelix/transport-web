@@ -53,7 +53,7 @@ export class CreateConsigneeMasterComponent implements OnInit {
         error => {
           this.error = true;
           this.success = false;
-          this.message = error.error.message;
+          this.message = error;
           this.error = true;
         });
     this.consigneeMaster = new ConsigneeMaster();

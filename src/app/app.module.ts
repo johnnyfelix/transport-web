@@ -26,6 +26,7 @@ import {DialogBoxComponent} from '@app/dialog-box/dialog-box.component';
 import {MAT_DATE_LOCALE} from '@angular/material';
 import {ViewMoveFactoryComponent} from '@app/view-move-factory/view-move-factory.component';
 import {ViewMoveEmptyComponent} from '@app/view-move-empty/view-move-empty.component';
+import {ViewMoveAllComponent} from '@app/view-move-all/view-move-all.component';
 import {CreateMoveFactoryComponent} from '@app/create-move-factory/create-move-factory.component';
 import {CreateMoveEmptyComponent} from '@app/create-move-empty/create-move-empty.component';
 import {VehicleMasterComponent} from '@app/vehicle-master/vehicle-master.component';
@@ -37,6 +38,12 @@ import {CreateDriverMasterComponent} from '@app/create-driver-master/create-driv
 import {FactoryMasterComponent} from '@app/factory-master/factory-master.component';
 import {CreateFactoryMasterComponent} from '@app/create-factory-master/create-factory-master.component';
 import {AdminMasterComponent} from '@app/admin-master/admin-master.component';
+import {CreateCashVoucherComponent} from '@app/create-cash-voucher/create-cash-voucher.component';
+import {ViewCashVouchersComponent} from '@app/view-cash-vouchers/view-cash-vouchers.component';
+import {ViewCashVoucherComponent} from '@app/view-cash-voucher/view-cash-voucher.component';
+import {PrintLayoutComponent} from '@app/print-layout/print-layout.component';
+import {PrintCashVoucherComponent} from '@app/print-cash-voucher/print-cash-voucher.component';
+import {HomeLayoutComponent} from '@app/home-layout/home-layout.component';
 
 
 @NgModule({
@@ -61,6 +68,7 @@ import {AdminMasterComponent} from '@app/admin-master/admin-master.component';
     DialogBoxComponent,
     ViewMoveFactoryComponent,
     ViewMoveEmptyComponent,
+    ViewMoveAllComponent,
     VehicleMasterComponent,
     ConsigneeMasterComponent,
     CreateVehicleMasterComponent,
@@ -69,7 +77,13 @@ import {AdminMasterComponent} from '@app/admin-master/admin-master.component';
     CreateDriverMasterComponent,
     FactoryMasterComponent,
     CreateFactoryMasterComponent,
-    AdminMasterComponent
+    AdminMasterComponent,
+    CreateCashVoucherComponent,
+    ViewCashVouchersComponent,
+    ViewCashVoucherComponent,
+    PrintLayoutComponent,
+    PrintCashVoucherComponent,
+    HomeLayoutComponent
   ],
   entryComponents: [ControlErrorComponent, DialogBoxComponent],
   imports: [
